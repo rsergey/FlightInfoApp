@@ -209,12 +209,12 @@
             </objects>
             <point key="canvasLocation" x="232" y="127"/>
         </scene>
-        <!--Flights for today-->
+        <!--Actual flights-->
         <scene sceneID="hjn-R3-Wev">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="AZv-60-JfI" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Flights for today" id="FWK-ke-iu4"/>
+                    <navigationItem key="navigationItem" title="Actual flights" id="FWK-ke-iu4"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JTL-Vk-3iq">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>

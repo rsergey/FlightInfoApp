@@ -21,7 +21,6 @@ class DepartureTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.title = "Today flights from " + airportIata
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         fecthFlights()
@@ -58,7 +57,7 @@ class DepartureTableViewController: UITableViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
             let startTime = dateFormatter.date(from: departuteTime)
-            dateFormatter.dateFormat = "HH:mm:ss"
+            dateFormatter.dateFormat = "dd-MM-yyy HH:mm:ss"
             time += " ↖︎ " + dateFormatter.string(from: startTime ?? Date())
         }
         
@@ -101,6 +100,7 @@ extension DepartureTableViewController {
                 let flight = try JSONDecoder().decode(ResponseFlights.self, from: data)
                 guard let departureFlights = flight.data else { return }
                 self.departureFlights = departureFlights
+                self.departureFlights.sort { $0.departure?.scheduled ?? "" < $1.departure?.scheduled ?? "" }
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.tableView.reloadData()
