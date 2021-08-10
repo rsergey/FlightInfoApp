@@ -98,3 +98,13 @@ struct Flight: Decodable {
 //    let flight_iata: String?
 //    let flight_icao: String?
 //}
+
+enum URLS: String {
+    case apiUrl = "http://api.aviationstack.com/v1/flights?access_key="
+    case accessKey = "bf9f1644f60ea683c4a27c95035f65ab"
+}
+
+enum FlyghtsViewKey: String {
+    case arrival = "&arr_iata="
+    case diparture = "&dep_iata="
+}

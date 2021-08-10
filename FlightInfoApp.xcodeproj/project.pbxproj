@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A534565426C3048D00B3048D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A534565326C3048D00B3048D /* NetworkManager.swift */; };
 		A5BD84EE26BE9DE600CC6FE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD84ED26BE9DE600CC6FE8 /* AppDelegate.swift */; };
 		A5BD84F026BE9DE600CC6FE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD84EF26BE9DE600CC6FE8 /* SceneDelegate.swift */; };
 		A5BD84F226BE9DE600CC6FE8 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD84F126BE9DE600CC6FE8 /* SelectionViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A534565326C3048D00B3048D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A5BD84EA26BE9DE600CC6FE8 /* FlightInfoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightInfoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BD84ED26BE9DE600CC6FE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5BD84EF26BE9DE600CC6FE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A534565226C3043C00B3048D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A534565326C3048D00B3048D /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		A5BD84E126BE9DE600CC6FE8 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +75,7 @@
 				A5BD850826BEA07C00CC6FE8 /* Models */,
 				A5BD850326BE9FEF00CC6FE8 /* ViewControllers */,
 				A5BD850226BE9FCE00CC6FE8 /* Storyboards */,
+				A534565226C3043C00B3048D /* Services */,
 				A5BD850626BEA03B00CC6FE8 /* SupportingFiles */,
 				A5BD850526BEA00B00CC6FE8 /* Resourses */,
 			);
@@ -189,6 +200,7 @@
 				A5BD84F226BE9DE600CC6FE8 /* SelectionViewController.swift in Sources */,
 				A5BD84EE26BE9DE600CC6FE8 /* AppDelegate.swift in Sources */,
 				A5BD850E26BF247500CC6FE8 /* ArrivalTableViewController.swift in Sources */,
+				A534565426C3048D00B3048D /* NetworkManager.swift in Sources */,
 				A5BD84F026BE9DE600CC6FE8 /* SceneDelegate.swift in Sources */,
 				A5BD851826BF2DC500CC6FE8 /* ResponseFlights.swift in Sources */,
 				A5BD851126BF249C00CC6FE8 /* DepartureTableViewController.swift in Sources */,

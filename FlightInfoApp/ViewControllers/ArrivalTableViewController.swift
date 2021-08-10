@@ -12,7 +12,6 @@ class ArrivalTableViewController: UITableViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Public Properties
-    var accessKey = ""
     var airportIata = ""
     
     // MARK: - Private Properties
@@ -23,7 +22,7 @@ class ArrivalTableViewController: UITableViewController {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        fecthFlights()
+        fecthArrivalFlights()
     }
 
     // MARK: - Table view data source
@@ -84,30 +83,15 @@ class ArrivalTableViewController: UITableViewController {
         }
     }
     
-}
-
-// MARK: - Networking
-extension ArrivalTableViewController {
-    private func fecthFlights() {
-        let urlAdress = "http://api.aviationstack.com/v1/flights?access_key=" + accessKey + "&arr_iata=" + airportIata
-        guard let url = URL(string: urlAdress) else { return }
-        URLSession.shared.dataTask(with: url) { (data, _, _) in
-            guard let data = data else {
-                self.networkFailedAlert()
-                return
-            }
-            do {
-                let flight = try JSONDecoder().decode(ResponseFlights.self, from: data)
-                guard let arrivalFlights = flight.data else { return }
-                self.arrivalFlights = arrivalFlights
-                self.arrivalFlights.sort { $0.arrival?.scheduled ?? "" < $1.arrival?.scheduled ?? "" }
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.tableView.reloadData()
-                }
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }.resume()
+    private func fecthArrivalFlights() {
+        NetworkManager.shared.fecthFlights(from: URLS.apiUrl.rawValue,
+                                           key: URLS.accessKey.rawValue,
+                                           type: .arrival,
+                                           iata: airportIata) { flights in
+            self.arrivalFlights = flights
+            self.activityIndicator.stopAnimating()
+            self.tableView.reloadData()
+        }
     }
+    
 }
