@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Сhoose an airport ↓-->
+        <!--Сhoose your airport-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SelectionViewController" customModule="FlightInfoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,69 +22,42 @@
                                 <color key="textColor" systemColor="systemGray2Color"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Y4U-dl-Z3A">
-                                <rect key="frame" x="115" y="388.5" width="184" height="234"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Nmo-e1-Ywg">
+                                <rect key="frame" x="100" y="353.5" width="214" height="95"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xjp-7t-q4N">
-                                        <rect key="frame" x="30.5" y="0.0" width="123" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Pulkovo (LED)">
-                                            <color key="titleColor" systemColor="labelColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="airportSelectionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yXz-LR-g1y"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRU-Bx-YHL">
-                                        <rect key="frame" x="0.0" y="66" width="184" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Sheremetyevo (SVO)">
-                                            <color key="titleColor" systemColor="labelColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="airportSelectionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BqK-gp-oRq"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3x-yT-rbL">
-                                        <rect key="frame" x="2.5" y="132" width="179" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Domodedovo (DME)">
-                                            <color key="titleColor" systemColor="labelColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="airportSelectionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XNE-k0-wKw"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zhw-gJ-d9x">
-                                        <rect key="frame" x="25" y="198" width="134" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Vnukovo (VKO)">
-                                            <color key="titleColor" systemColor="labelColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="airportSelectionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a0G-aV-6RM"/>
-                                        </connections>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter IATA code of your airport ↘︎" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVm-CY-AXC">
+                                        <rect key="frame" x="0.0" y="0.0" width="214" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="LED for Pulkovo..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uf5-ZQ-Tk5">
+                                        <rect key="frame" x="0.0" y="61" width="214" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    </textField>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Y4U-dl-Z3A" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ATQ-Kv-cSW"/>
-                            <constraint firstItem="Y4U-dl-Z3A" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="OI5-aU-knc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Nmo-e1-Ywg" secondAttribute="trailing" constant="100" id="IvV-Ex-QjX"/>
+                            <constraint firstItem="Nmo-e1-Ywg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="ZhO-dS-pXo"/>
                             <constraint firstItem="kEn-17-Dox" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jTD-mt-DpY"/>
+                            <constraint firstItem="Nmo-e1-Ywg" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-100" id="w8n-Iw-BhE"/>
                             <constraint firstItem="kEn-17-Dox" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="yU1-kM-TyK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Сhoose an airport ↓" id="wBy-m0-Dqk"/>
+                    <navigationItem key="navigationItem" title="Сhoose your airport" id="wBy-m0-Dqk"/>
                     <connections>
+                        <outlet property="iataTextField" destination="Uf5-ZQ-Tk5" id="Qsr-3D-zP7"/>
                         <segue destination="AZv-60-JfI" kind="show" identifier="showFlightsSegue" id="kcq-x1-VpO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1039" y="127"/>
+            <point key="canvasLocation" x="1037.68115942029" y="126.5625"/>
         </scene>
         <!--Arrival-->
         <scene sceneID="q4n-Vd-bH1">
@@ -233,9 +206,6 @@
     <resources>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
