@@ -12,7 +12,6 @@ class DepartureTableViewController: UITableViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Public Properties
-    var accessKey = ""
     var airportIata = ""
     
     // MARK: - Private Properties
@@ -23,7 +22,7 @@ class DepartureTableViewController: UITableViewController {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        fecthFlights()
+        fecthDepartureFlights()
     }
 
     // MARK: - Table view data source
@@ -83,31 +82,42 @@ class DepartureTableViewController: UITableViewController {
             self.present(alert, animated: true)
         }
     }
+    
+    private func fecthDepartureFlights() {
+        NetworkManager.shared.fecthFlights(from: URLS.apiUrl.rawValue,
+                                           key: URLS.accessKey.rawValue,
+                                           type: .diparture,
+                                           iata: airportIata) { flights in
+            self.departureFlights = flights
+            self.activityIndicator.stopAnimating()
+            self.tableView.reloadData()
+        }
+    }
 
 }
 
 // MARK: - Networking
-extension DepartureTableViewController {
-    private func fecthFlights() {
-        let urlAdress = "http://api.aviationstack.com/v1/flights?access_key=" + accessKey + "&dep_iata=" + airportIata
-        guard let url = URL(string: urlAdress) else { return }
-        URLSession.shared.dataTask(with: url) { (data, _, _) in
-            guard let data = data else {
-                self.networkFailedAlert()
-                return
-            }
-            do {
-                let flight = try JSONDecoder().decode(ResponseFlights.self, from: data)
-                guard let departureFlights = flight.data else { return }
-                self.departureFlights = departureFlights
-                self.departureFlights.sort { $0.departure?.scheduled ?? "" < $1.departure?.scheduled ?? "" }
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.tableView.reloadData()
-                }
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }.resume()
-    }
-}
+//extension DepartureTableViewController {
+//    private func fecthFlights() {
+//        let urlAdress = "http://api.aviationstack.com/v1/flights?access_key=" + accessKey + "&dep_iata=" + airportIata
+//        guard let url = URL(string: urlAdress) else { return }
+//        URLSession.shared.dataTask(with: url) { (data, _, _) in
+//            guard let data = data else {
+//                self.networkFailedAlert()
+//                return
+//            }
+//            do {
+//                let flight = try JSONDecoder().decode(ResponseFlights.self, from: data)
+//                guard let departureFlights = flight.data else { return }
+//                self.departureFlights = departureFlights
+//                self.departureFlights.sort { $0.departure?.scheduled ?? "" < $1.departure?.scheduled ?? "" }
+//                DispatchQueue.main.async {
+//                    self.activityIndicator.stopAnimating()
+//                    self.tableView.reloadData()
+//                }
+//            } catch let error {
+//                print(error.localizedDescription)
+//            }
+//        }.resume()
+//    }
+//}
