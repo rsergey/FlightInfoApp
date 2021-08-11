@@ -26,7 +26,9 @@ class NetworkManager {
             guard let data = data else { return }
             
             do {
-                let flight = try JSONDecoder().decode(ResponseFlights.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let flight = try decoder.decode(ResponseFlights.self, from: data)
                 guard var flights = flight.data else { return }
                 flights.sort { $0.arrival?.scheduled ?? "" < $1.arrival?.scheduled ?? "" }
                 
@@ -38,6 +40,5 @@ class NetworkManager {
             }
         }.resume()
     }
-    
     
 }

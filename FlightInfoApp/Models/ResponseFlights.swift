@@ -18,8 +18,8 @@ struct ResponseFlights: Decodable {
 //}
 
 struct Flights: Decodable {
-//    let flight_date: String?
-//    let flight_status: String?
+//    let flightDate: String?
+//    let flightStatus: String?
     let departure: DepartureAirport?
     let arrival: ArrivalAirport?
     let airline: Airline?
@@ -39,8 +39,8 @@ struct DepartureAirport: Decodable {
     let scheduled: String?
 //    let estimated: String?
 //    let actual: String?
-//    let estimated_runway: String?
-//    let actual_runway: String?
+//    let estimatedRunway: String?
+//    let actualRunway: String?
 }
 
 struct ArrivalAirport: Decodable {
@@ -55,8 +55,8 @@ struct ArrivalAirport: Decodable {
     let scheduled: String?
 //    let estimated: String?
 //    let actual: String?
-//    let estimated_runway: String?
-//    let actual_runway: String?
+//    let estimatedRunway: String?
+//    let actualRunway: String?
 }
 
 struct Airline: Decodable {
@@ -85,18 +85,18 @@ struct Flight: Decodable {
 //    let longitude: Float?
 //    let altitude: Float?
 //    let direction: Float?
-//    let speed_horizontal: Float?
-//    let speed_vertical: Float?
-//    let is_ground: Bool?
+//    let speedHorizontal: Float?
+//    let speedVertical: Float?
+//    let isGround: Bool?
 //}
 
 //struct CodesharedAirline: Decodable {
-//    let airline_name: String?
-//    let airline_iata: String?
-//    let airline_icao: String?
-//    let flight_number: String?
-//    let flight_iata: String?
-//    let flight_icao: String?
+//    let airlineName: String?
+//    let airlineIata: String?
+//    let airlineIcao: String?
+//    let flightNumber: String?
+//    let flightIata: String?
+//    let flightIcao: String?
 //}
 
 enum URLS: String {
