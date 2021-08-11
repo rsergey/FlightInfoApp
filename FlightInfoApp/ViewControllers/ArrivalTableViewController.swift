@@ -84,7 +84,7 @@ class ArrivalTableViewController: UITableViewController {
     }
     
     private func fecthArrivalFlights() {
-        NetworkManager.shared.fecthFlights(from: URLS.apiUrl.rawValue,
+        NetworkManager.shared.fetchFlights(from: URLS.apiUrl.rawValue,
                                            key: URLS.accessKey.rawValue,
                                            type: .arrival,
                                            iata: airportIata) { result in
