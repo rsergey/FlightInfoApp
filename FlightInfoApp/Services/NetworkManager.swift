@@ -12,13 +12,13 @@ class NetworkManager {
     
     private init() {}
     
-    func fecthFlights(from url: String, key: String, type: FlyghtsViewKey, iata: String, with complition: @escaping ([Flights]?, Error?) -> Void) {
+    func fecthFlights(from url: String, key: String, type: FlyghtsViewKey, iata: String, with complition: @escaping (Result<[Flights], Error>) -> Void) {
         let urlAdress = url + key + type.rawValue + iata
         guard let url = URL(string: urlAdress) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
-                complition(nil, error)
+                complition(.failure(error))
                 print(error.localizedDescription)
                 return
             }
@@ -31,7 +31,7 @@ class NetworkManager {
                 flights.sort { $0.arrival?.scheduled ?? "" < $1.arrival?.scheduled ?? "" }
                 
                 DispatchQueue.main.async {
-                    complition(flights, nil)
+                    complition(.success(flights))
                 }
             } catch let error {
                 print(error.localizedDescription)
