@@ -12,7 +12,6 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var iataTextField: UITextField!
     
     // MARK: - Private Properties
-    private let accessKey = "bf9f1644f60ea683c4a27c95035f65ab"
     private var airportIata = ""
 
     // MARK: - Override Methods
@@ -31,11 +30,9 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
         guard let viewControllers = tabBarController.viewControllers else { return }
         for viewController in viewControllers {
             if let arrivalVC = viewController as? ArrivalTableViewController {
-                arrivalVC.accessKey = accessKey
                 arrivalVC.airportIata = airportIata
             }
             if let departureVC = viewController as? DepartureTableViewController {
-                departureVC.accessKey = accessKey
                 departureVC.airportIata = airportIata
             }
         }

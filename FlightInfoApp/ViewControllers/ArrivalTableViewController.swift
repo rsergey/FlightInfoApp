@@ -87,10 +87,15 @@ class ArrivalTableViewController: UITableViewController {
         NetworkManager.shared.fecthFlights(from: URLS.apiUrl.rawValue,
                                            key: URLS.accessKey.rawValue,
                                            type: .arrival,
-                                           iata: airportIata) { flights in
-            self.arrivalFlights = flights
-            self.activityIndicator.stopAnimating()
-            self.tableView.reloadData()
+                                           iata: airportIata) { flights, error in
+            if let _ = error {
+                self.networkFailedAlert()
+            } else {
+                guard let flights = flights else { return }
+                self.arrivalFlights = flights
+                self.activityIndicator.stopAnimating()
+                self.tableView.reloadData()
+            }
         }
     }
     
