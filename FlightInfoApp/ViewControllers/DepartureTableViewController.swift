@@ -84,8 +84,8 @@ class DepartureTableViewController: UITableViewController {
     }
     
     private func fecthDepartureFlights() {
-        NetworkManager.shared.fetchFlights(from: URLS.apiUrl.rawValue,
-                                           key: URLS.accessKey.rawValue,
+        NetworkManager.shared.fetchFlights(from: .flightsUrl,
+                                           key: .accessKey,
                                            type: .diparture,
                                            iata: airportIata) { result in
             switch result {
@@ -94,6 +94,7 @@ class DepartureTableViewController: UITableViewController {
                 self.activityIndicator.stopAnimating()
                 self.tableView.reloadData()
             case .failure(_):
+                self.activityIndicator.stopAnimating()
                 self.networkFailedAlert()
             }
         }

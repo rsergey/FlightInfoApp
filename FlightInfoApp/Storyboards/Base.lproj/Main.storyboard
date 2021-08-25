@@ -38,12 +38,24 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahc-r4-EnN">
+                                <rect key="frame" x="118.5" y="761" width="177" height="33"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <state key="normal" title="...or Find your airport ⏎">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Cy3-Xn-b2W" kind="show" id="SHY-6t-Qrs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="kEn-17-Dox" firstAttribute="top" secondItem="ahc-r4-EnN" secondAttribute="bottom" constant="50" id="Hb6-kd-BAA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Nmo-e1-Ywg" secondAttribute="trailing" constant="100" id="IvV-Ex-QjX"/>
                             <constraint firstItem="Nmo-e1-Ywg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="ZhO-dS-pXo"/>
+                            <constraint firstItem="ahc-r4-EnN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ZmX-fr-hwg"/>
                             <constraint firstItem="kEn-17-Dox" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jTD-mt-DpY"/>
                             <constraint firstItem="Nmo-e1-Ywg" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-100" id="w8n-Iw-BhE"/>
                             <constraint firstItem="kEn-17-Dox" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="yU1-kM-TyK"/>
@@ -58,6 +70,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1037.68115942029" y="126.5625"/>
+        </scene>
+        <!--Find your airport-->
+        <scene sceneID="Oxa-pd-DQf">
+            <objects>
+                <tableViewController modalPresentationStyle="fullScreen" id="Cy3-Xn-b2W" customClass="AirportListTableViewController" customModule="FlightInfoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0UM-Ii-XGK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="selectionAirportCell" id="BMf-iC-6oL">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BMf-iC-6oL" id="wfv-1m-YXX">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Cy3-Xn-b2W" id="st4-Yb-Xgt"/>
+                            <outlet property="delegate" destination="Cy3-Xn-b2W" id="cmV-T2-O3c"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Find your airport" id="wIz-eL-Mmo">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" image="arrow.rectanglepath" catalog="system" id="t6x-UL-kcq">
+                            <connections>
+                                <action selector="refreshAirportList:" destination="Cy3-Xn-b2W" id="Chr-1L-ZYL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MiN-EM-huW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1038" y="836"/>
         </scene>
         <!--Arrival-->
         <scene sceneID="q4n-Vd-bH1">
@@ -204,10 +251,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.rectanglepath" catalog="system" width="128" height="104"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

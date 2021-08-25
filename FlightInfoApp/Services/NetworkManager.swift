@@ -12,8 +12,8 @@ class NetworkManager {
     
     private init() {}
     
-    func fetchFlights(from url: String, key: String, type: FlyghtsViewKey, iata: String, with complition: @escaping (Result<[Flights], Error>) -> Void) {
-        let urlAdress = url + key + type.rawValue + iata
+    func fetchFlights(from url: URLs, key: Keys, type: FlyghtsViewKey, iata: String, with complition: @escaping (Result<[Flights], Error>) -> Void) {
+        let urlAdress = url.rawValue + key.rawValue + type.rawValue + iata
         guard let url = URL(string: urlAdress) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
@@ -41,4 +41,9 @@ class NetworkManager {
         }.resume()
     }
     
+    func fetchAirports(from url: URLs, key: Keys, with complition: @escaping (Result<[Airports], Error>) -> Void) {
+        let urlAdress = url.rawValue + key.rawValue
+        guard let url = URL(string: urlAdress) else { return }
+        
+    }
 }
