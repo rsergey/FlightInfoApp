@@ -51,7 +51,7 @@ class AirportListTableViewController: UITableViewController {
     }
     
     private func prepareDataForSecondaryText(airport: Airports) -> String {
-        (airport.countryName ?? "-") + " (" + (airport.cityIataCode ?? "-") + ")"
+        (airport.countryName ?? "-") + " (city iata: " + (airport.cityIataCode ?? "-") + ")"
     }
     
     private func fetchAirports() {
