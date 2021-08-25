@@ -45,5 +45,27 @@ class NetworkManager {
         let urlAdress = url.rawValue + key.rawValue
         guard let url = URL(string: urlAdress) else { return }
         
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let error = error {
+                complition(.failure(error))
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let airport = try decoder.decode(ResponseAirports.self, from: data)
+                guard let airports = airport.data else { return }
+                
+                DispatchQueue.main.async {
+                    complition(.success(airports))
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }.resume()
     }
 }
