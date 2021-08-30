@@ -9,13 +9,17 @@ import UIKit
 
 class AirportListTableViewController: UITableViewController {
     // MARK: - IBOutlets
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Private Properties
     private var airports: [Airports] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
         fetchAirports()
+        setupRefreshControl()
     }
 
     // MARK: - Table view data source
@@ -54,16 +58,45 @@ class AirportListTableViewController: UITableViewController {
         (airport.countryName ?? "-") + " (city iata: " + (airport.cityIataCode ?? "-") + ")"
     }
     
-    private func fetchAirports() {
+    private func networkFailedAlert() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Network request failed!",
+                                          message: "Please try again.",
+                                          preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .default)
+            alert.addAction(okAction)
+            self.present(alert, animated: true)
+        }
+    }
+    
+    private func stopUpdateAnimation() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            if self.refreshControl != nil {
+                self.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
+    @objc private func fetchAirports() {
         NetworkManager.shared.fetchAirports(from: .airportsUrl,
                                             key: .accessKey) { (result) in
             switch result {
             case .success(let airports):
                 self.airports = airports
+                self.stopUpdateAnimation()
                 self.tableView.reloadData()
             case .failure(_):
-                print("networkfail airports")
+                self.stopUpdateAnimation()
+                self.networkFailedAlert()
             }
         }
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: #selector(fetchAirports), for: .valueChanged)
     }
 }

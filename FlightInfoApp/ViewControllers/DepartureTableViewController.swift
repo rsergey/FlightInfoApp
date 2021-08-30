@@ -23,6 +23,7 @@ class DepartureTableViewController: UITableViewController {
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         fecthDepartureFlights()
+        setupRefreshControl()
     }
 
     // MARK: - Table view data source
@@ -83,7 +84,16 @@ class DepartureTableViewController: UITableViewController {
         }
     }
     
-    private func fecthDepartureFlights() {
+    private func stopUpdateAnimation() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            if self.refreshControl != nil {
+                self.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
+    @objc private func fecthDepartureFlights() {
         NetworkManager.shared.fetchFlights(from: .flightsUrl,
                                            key: .accessKey,
                                            type: .diparture,
@@ -91,13 +101,18 @@ class DepartureTableViewController: UITableViewController {
             switch result {
             case .success(let flights):
                 self.departureFlights = flights
-                self.activityIndicator.stopAnimating()
+                self.stopUpdateAnimation()
                 self.tableView.reloadData()
             case .failure(_):
-                self.activityIndicator.stopAnimating()
+                self.stopUpdateAnimation()
                 self.networkFailedAlert()
             }
         }
     }
-
+    
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: #selector(fecthDepartureFlights), for: .valueChanged)
+    }
 }
