@@ -15,25 +15,48 @@ class DepartureTableViewController: UITableViewController {
     var airportIata = ""
     
     // MARK: - Private Properties
+    private let searchController = UISearchController(searchResultsController: nil)
     private var departureFlights: [Flights] = []
+    private var filteredFlights: [Flights] = []
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        fecthDepartureFlights()
         setupRefreshControl()
+        fecthDepartureFlights()
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        tabBarController?.navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        departureFlights.count
+        if isFiltering {
+            return filteredFlights.count
+        }
+        return departureFlights.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "departureFlightCell", for: indexPath)
-        let departureFlight = departureFlights[indexPath.row]
+        var departureFlight: Flights
+        if isFiltering {
+            departureFlight = filteredFlights[indexPath.row]
+        } else {
+            departureFlight = departureFlights[indexPath.row]
+        }
         var content = cell.defaultContentConfiguration()
         content.text = prepareDataForText(departureFlight: departureFlight)
         content.secondaryText = prepareDataForSecondaryText(departureFlight: departureFlight)
@@ -114,5 +137,19 @@ class DepartureTableViewController: UITableViewController {
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl?.addTarget(self, action: #selector(fecthDepartureFlights), for: .valueChanged)
+    }
+}
+
+// MARK: - Extensions
+extension DepartureTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterFlights(searchController.searchBar.text ?? "")
+    }
+    
+    private func filterFlights(_ searchText: String) {
+        filteredFlights = departureFlights.filter({ (flight: Flights) -> Bool in
+            return (flight.arrival?.airport?.lowercased().contains(searchText.lowercased()) ?? false)
+        })
+        tableView.reloadData()
     }
 }

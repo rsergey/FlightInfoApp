@@ -12,24 +12,48 @@ class AirportListTableViewController: UITableViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Private Properties
+    private let searchController = UISearchController(searchResultsController: nil)
     private var airports: [Airports] = []
+    private var filteredAirports: [Airports] = []
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
 
+    //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        fetchAirports()
         setupRefreshControl()
+        fetchAirports()
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        airports.count
+        if isFiltering {
+            return filteredAirports.count
+        }
+        return airports.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "selectionAirportCell", for: indexPath)
-        let airport = airports[indexPath.row]
+        var airport: Airports
+        if isFiltering {
+            airport = filteredAirports[indexPath.row]
+        } else {
+            airport = airports[indexPath.row]
+        }
         var content = cell.defaultContentConfiguration()
         content.text = prepareDataForText(airport: airport)
         content.secondaryText = prepareDataForSecondaryText(airport: airport)
@@ -98,5 +122,19 @@ class AirportListTableViewController: UITableViewController {
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl?.addTarget(self, action: #selector(fetchAirports), for: .valueChanged)
+    }
+}
+
+// MARK: - Extensions
+extension AirportListTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterAirports(searchController.searchBar.text ?? "")
+    }
+    
+    private func filterAirports(_ searchText: String) {
+        filteredAirports = airports.filter({ (airport: Airports) -> Bool in
+            return (airport.airportName?.lowercased().contains(searchText.lowercased()) ?? false)
+        })
+        tableView.reloadData()
     }
 }
