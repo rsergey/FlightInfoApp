@@ -33,7 +33,7 @@ class AirportListTableViewController: UITableViewController {
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.placeholder = "Search airport"
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
@@ -60,10 +60,30 @@ class AirportListTableViewController: UITableViewController {
         cell.contentConfiguration = content
         return cell
     }
-
-    // MARK: - Table View Delegate
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showFlightsSegue" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let airport: Airports
+                if isFiltering {
+                    airport = filteredAirports[indexPath.row]
+                } else {
+                    airport = airports[indexPath.row]
+                }
+                
+                guard let tabBarController = segue.destination as? UITabBarController else { return }
+                guard let viewControllers = tabBarController.viewControllers else { return }
+                
+                viewControllers.forEach {
+                    if let arrivalVC = $0 as? ArrivalTableViewController {
+                        arrivalVC.airportIata = airport.iataCode ?? ""
+                    } else if let departureVC = $0 as? DepartureTableViewController {
+                        departureVC.airportIata = airport.iataCode ?? ""
+                    }
+                }
+            }
+        }
     }
 
     // MARK: - IBAction

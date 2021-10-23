@@ -29,6 +29,8 @@ class DepartureTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.navigationItem.title = "Actual flights from " + airportIata
+        
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
@@ -36,7 +38,7 @@ class DepartureTableViewController: UITableViewController {
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.placeholder = "Search flight"
         tabBarController?.navigationItem.searchController = searchController
         definesPresentationContext = true
     }

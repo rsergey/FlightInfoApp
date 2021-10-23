@@ -94,6 +94,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="AZv-60-JfI" kind="show" identifier="showFlightsSegue" id="wNo-f4-Grc"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -114,7 +117,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiN-EM-huW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1038" y="836"/>
+            <point key="canvasLocation" x="1038" y="845"/>
         </scene>
         <!--Arrival-->
         <scene sceneID="q4n-Vd-bH1">
@@ -257,9 +260,12 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3Z-7c-iBL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1825" y="127"/>
+            <point key="canvasLocation" x="1984" y="141"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="kcq-x1-VpO"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.rectanglepath" catalog="system" width="128" height="104"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
