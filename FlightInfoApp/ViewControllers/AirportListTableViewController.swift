@@ -73,6 +73,7 @@ class AirportListTableViewController: UITableViewController {
                 }
                 
                 guard let tabBarController = segue.destination as? UITabBarController else { return }
+                tabBarController.navigationItem.title = "Airport • " + (airport.iataCode ?? "")
                 guard let viewControllers = tabBarController.viewControllers else { return }
                 
                 viewControllers.forEach {
@@ -84,11 +85,6 @@ class AirportListTableViewController: UITableViewController {
                 }
             }
         }
-    }
-
-    // MARK: - IBAction
-    @IBAction func refreshAirportList(_ sender: UIBarButtonItem) {
-        fetchAirports()
     }
     
     // MARK: - Private Methods
@@ -140,7 +136,7 @@ class AirportListTableViewController: UITableViewController {
     
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.attributedTitle = NSAttributedString(string: "Update airports list")
         refreshControl?.addTarget(self, action: #selector(fetchAirports), for: .valueChanged)
     }
 }

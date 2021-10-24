@@ -29,8 +29,8 @@ class DepartureTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationItem.title = "Actual flights from " + airportIata
-        
+//        navigationItem.title = "Flights from " + airportIata
+
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
@@ -66,9 +66,20 @@ class DepartureTableViewController: UITableViewController {
         return cell
     }
     
-    // MARK: - Table View Delegate
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            let flight: Flights
+            
+            if isFiltering {
+                flight = filteredFlights[indexPath.row]
+            } else {
+                flight = departureFlights[indexPath.row]
+            }
+            
+            guard let detailsVC = segue.destination as? DetailsViewController else { return }
+            detailsVC.flight = flight
+        }
     }
     
     // MARK: - Private Methods
@@ -137,7 +148,7 @@ class DepartureTableViewController: UITableViewController {
     
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.attributedTitle = NSAttributedString(string: "Update flights list")
         refreshControl?.addTarget(self, action: #selector(fecthDepartureFlights), for: .valueChanged)
     }
 }

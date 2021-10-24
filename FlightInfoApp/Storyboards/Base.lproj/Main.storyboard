@@ -31,7 +31,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="LED for Pulkovo..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uf5-ZQ-Tk5">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="from AAA to ZZZ..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uf5-ZQ-Tk5">
                                         <rect key="frame" x="0.0" y="61" width="230" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -64,7 +64,13 @@
                             <constraint firstItem="kEn-17-Dox" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-10" id="yU1-kM-TyK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Сhoose your airport" id="wBy-m0-Dqk"/>
+                    <navigationItem key="navigationItem" title="Сhoose your airport" id="wBy-m0-Dqk">
+                        <barButtonItem key="rightBarButtonItem" image="gearshape" catalog="system" id="yYk-im-ZrP">
+                            <connections>
+                                <segue destination="MPW-yw-HSd" kind="show" id="zni-X7-lub"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="iataTextField" destination="Uf5-ZQ-Tk5" id="Qsr-3D-zP7"/>
                         <segue destination="AZv-60-JfI" kind="show" identifier="showFlightsSegue" id="kcq-x1-VpO"/>
@@ -104,13 +110,7 @@
                             <outlet property="delegate" destination="Cy3-Xn-b2W" id="cmV-T2-O3c"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Find your airport" id="wIz-eL-Mmo">
-                        <barButtonItem key="rightBarButtonItem" title="Refresh" image="arrow.rectanglepath" catalog="system" id="t6x-UL-kcq">
-                            <connections>
-                                <action selector="refreshAirportList:" destination="Cy3-Xn-b2W" id="Chr-1L-ZYL"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Find your airport" id="wIz-eL-Mmo"/>
                     <connections>
                         <outlet property="activityIndicator" destination="JsS-ur-PXH" id="XKg-OO-QN2"/>
                     </connections>
@@ -118,6 +118,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiN-EM-huW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1038" y="845"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="bfu-AJ-Qk2">
+            <objects>
+                <viewController id="MPW-yw-HSd" customClass="SettingsViewController" customModule="FlightInfoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dtj-6Z-f7R">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="0sG-lY-C29"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="671-3I-EJd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5kg-Or-Yc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1877" y="-616"/>
         </scene>
         <!--Arrival-->
         <scene sceneID="q4n-Vd-bH1">
@@ -155,6 +171,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="e8o-xl-3v9" kind="show" id="9lp-9U-lSt"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -169,7 +188,102 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zo-2N-7oG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2751" y="-177"/>
+            <point key="canvasLocation" x="2780" y="-224"/>
+        </scene>
+        <!--Flight details-->
+        <scene sceneID="swl-5Z-R17">
+            <objects>
+                <viewController id="e8o-xl-3v9" customClass="DetailsViewController" customModule="FlightInfoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q9Z-K7-Lqf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="buE-2t-Lc2">
+                                <rect key="frame" x="59" y="160" width="296.5" height="151"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="jJO-rF-3xX">
+                                        <rect key="frame" x="0.0" y="0.0" width="113.5" height="151"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AAA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8O-pf-aa7">
+                                                <rect key="frame" x="0.0" y="0.0" width="113.5" height="60"/>
+                                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHW-UZ-Pwt">
+                                                <rect key="frame" x="0.0" y="85" width="113.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMK-Fo-ljr">
+                                                <rect key="frame" x="0.0" y="130.5" width="113.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="→" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlX-8R-2bp">
+                                        <rect key="frame" x="123.5" y="0.0" width="49.5" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="FcL-QY-bxB">
+                                        <rect key="frame" x="183" y="0.0" width="113.5" height="151"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZZZ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDS-7E-jNV">
+                                                <rect key="frame" x="0.0" y="0.0" width="113.5" height="60"/>
+                                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtB-Za-Y1i">
+                                                <rect key="frame" x="0.0" y="85" width="113.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82M-X8-jaY">
+                                                <rect key="frame" x="0.0" y="130.5" width="113.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="VtB-Za-Y1i" firstAttribute="height" secondItem="yHW-UZ-Pwt" secondAttribute="height" id="Kaz-U6-aY4"/>
+                                    <constraint firstItem="jJO-rF-3xX" firstAttribute="width" secondItem="FcL-QY-bxB" secondAttribute="width" id="ep0-o2-fzg"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="x9i-A5-EwH"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="buE-2t-Lc2" firstAttribute="centerX" secondItem="x9i-A5-EwH" secondAttribute="centerX" id="3fw-RU-1PE"/>
+                            <constraint firstItem="buE-2t-Lc2" firstAttribute="top" secondItem="x9i-A5-EwH" secondAttribute="top" constant="20" id="ee3-fd-CHh"/>
+                            <constraint firstItem="buE-2t-Lc2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x9i-A5-EwH" secondAttribute="leading" constant="10" id="gTf-3n-HMH"/>
+                            <constraint firstItem="x9i-A5-EwH" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="buE-2t-Lc2" secondAttribute="trailing" constant="10" id="rOJ-ZN-GMX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Flight details" id="KfD-PJ-qw3"/>
+                    <connections>
+                        <outlet property="airportsStackView" destination="buE-2t-Lc2" id="g9H-vO-aHN"/>
+                        <outlet property="arrivalAirportIataLabel" destination="gDS-7E-jNV" id="Ylg-HB-igT"/>
+                        <outlet property="arrivalAirportLabel" destination="VtB-Za-Y1i" id="VAe-7d-vVE"/>
+                        <outlet property="arrivalTimeLabel" destination="82M-X8-jaY" id="no1-Gl-PIJ"/>
+                        <outlet property="departureAirportIataLabel" destination="o8O-pf-aa7" id="hNK-a6-lZ0"/>
+                        <outlet property="departureAirportLabel" destination="yHW-UZ-Pwt" id="qd5-II-MnZ"/>
+                        <outlet property="departureTimelabel" destination="wMK-Fo-ljr" id="bi6-RD-OVf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cvL-03-dB3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3682.608695652174" y="126.5625"/>
         </scene>
         <!--Departure-->
         <scene sceneID="Qcb-fZ-YzM">
@@ -207,6 +321,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="e8o-xl-3v9" kind="show" id="utP-Wk-B0h"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -222,7 +339,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TgC-8a-zJO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2751" y="479"/>
+            <point key="canvasLocation" x="2780" y="486"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vNc-km-ZMo">
@@ -260,14 +377,15 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3Z-7c-iBL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1984" y="141"/>
+            <point key="canvasLocation" x="1878" y="127"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="kcq-x1-VpO"/>
+        <segue reference="9lp-9U-lSt"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrow.rectanglepath" catalog="system" width="128" height="104"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="linkColor">
@@ -275,6 +393,9 @@
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
