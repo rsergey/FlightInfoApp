@@ -169,6 +169,9 @@
                                         <rect key="frame" x="0.0" y="283.5" width="230" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="→ aviationstack.com"/>
+                                        <connections>
+                                            <action selector="webButtonTapped" destination="MPW-yw-HSd" eventType="touchUpInside" id="4PR-2x-9pB"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
