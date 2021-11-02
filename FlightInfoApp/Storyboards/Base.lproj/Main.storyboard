@@ -110,25 +110,7 @@
                             <outlet property="delegate" destination="Cy3-Xn-b2W" id="cmV-T2-O3c"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Find your airport" id="wIz-eL-Mmo">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Load" id="mqc-dC-4h1">
-                                <connections>
-                                    <action selector="loadButtonTapped:" destination="Cy3-Xn-b2W" id="vvD-JH-uCD"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Save" id="ary-n0-Gzr">
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="Cy3-Xn-b2W" id="1PQ-pN-SU6"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Clear" id="gV3-NN-0wz">
-                                <connections>
-                                    <action selector="clearButtonTapped:" destination="Cy3-Xn-b2W" id="Ghw-f4-OHO"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Find your airport" id="wIz-eL-Mmo"/>
                     <connections>
                         <outlet property="activityIndicator" destination="JsS-ur-PXH" id="XKg-OO-QN2"/>
                     </connections>

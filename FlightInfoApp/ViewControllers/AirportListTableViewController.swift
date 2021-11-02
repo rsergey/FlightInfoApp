@@ -86,20 +86,6 @@ class AirportListTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - IBActions
-    @IBAction func loadButtonTapped(_ sender: UIBarButtonItem) {
-        fetchAirportsFromStorage()
-    }
-    
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        StorageManager.shared.save(airports: airports)
-    }
-
-    @IBAction func clearButtonTapped(_ sender: UIBarButtonItem) {
-        StorageManager.shared.clearAirports()
-    }
-    
-    
     // MARK: - Private Methods
     private func prepareDataForText(airport: Airports) -> String {
         var text = " → " + (airport.airportName ?? "-")
@@ -123,6 +109,23 @@ class AirportListTableViewController: UITableViewController {
         }
     }
     
+    private func warningNewRequestAlert() {
+        let alert = UIAlertController(title: "Updating airports list from network.",
+                                      message: "The full list of airports rarely changes. Are you sure you want to update the data?",
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Update",
+                                     style: .default) { _ in
+            self.fetchAirportsFromNetwork()
+        }
+        alert.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel) { _ in
+            self.stopUpdateAnimation()
+        }
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
+    }
+    
     private func stopUpdateAnimation() {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
@@ -130,6 +133,12 @@ class AirportListTableViewController: UITableViewController {
                 self.refreshControl?.endRefreshing()
             }
         }
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Update airports list")
+        refreshControl?.addTarget(self, action: #selector(fetchDataFromNetwork), for: .valueChanged)
     }
     
     private func getAirports() {
@@ -140,7 +149,13 @@ class AirportListTableViewController: UITableViewController {
         }
     }
     
-    @objc private func fetchAirportsFromNetwork() {
+    @objc private func fetchDataFromNetwork() {
+        if !airports.isEmpty {
+            warningNewRequestAlert()
+        }
+    }
+    
+    private func fetchAirportsFromNetwork() {
         NetworkManager.shared.fetchAirports(from: .airportsUrl,
                                             key: .accessKey) { (result) in
             switch result {
@@ -148,6 +163,7 @@ class AirportListTableViewController: UITableViewController {
                 self.airports = airports
                 self.stopUpdateAnimation()
                 self.tableView.reloadData()
+                StorageManager.shared.clearAirports()
                 StorageManager.shared.save(airports: airports)
             case .failure(_):
                 self.stopUpdateAnimation()
@@ -178,11 +194,6 @@ class AirportListTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    private func setupRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: "Update airports list")
-        refreshControl?.addTarget(self, action: #selector(fetchAirportsFromNetwork), for: .valueChanged)
-    }
 }
 
 // MARK: - Extensions
