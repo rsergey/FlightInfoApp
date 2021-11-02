@@ -26,10 +26,9 @@ class AirportListTableViewController: UITableViewController {
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
-        fetchAirports()
+        getAirports()
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -87,6 +86,20 @@ class AirportListTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - IBActions
+    @IBAction func loadButtonTapped(_ sender: UIBarButtonItem) {
+        fetchAirportsFromStorage()
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        StorageManager.shared.save(airports: airports)
+    }
+
+    @IBAction func clearButtonTapped(_ sender: UIBarButtonItem) {
+        StorageManager.shared.clearAirports()
+    }
+    
+    
     // MARK: - Private Methods
     private func prepareDataForText(airport: Airports) -> String {
         var text = " → " + (airport.airportName ?? "-")
@@ -119,7 +132,15 @@ class AirportListTableViewController: UITableViewController {
         }
     }
     
-    @objc private func fetchAirports() {
+    private func getAirports() {
+        activityIndicator.startAnimating()
+        fetchAirportsFromStorage()
+        if airports.isEmpty {
+            fetchAirportsFromNetwork()
+        }
+    }
+    
+    @objc private func fetchAirportsFromNetwork() {
         NetworkManager.shared.fetchAirports(from: .airportsUrl,
                                             key: .accessKey) { (result) in
             switch result {
@@ -127,6 +148,7 @@ class AirportListTableViewController: UITableViewController {
                 self.airports = airports
                 self.stopUpdateAnimation()
                 self.tableView.reloadData()
+                StorageManager.shared.save(airports: airports)
             case .failure(_):
                 self.stopUpdateAnimation()
                 self.networkFailedAlert()
@@ -134,10 +156,32 @@ class AirportListTableViewController: UITableViewController {
         }
     }
     
+    private func fetchAirportsFromStorage() {
+        StorageManager.shared.fetchData { result in
+            switch result {
+            case .success(let airports):
+                self.airports = []
+                for airport in airports {
+                    self.airports.append(Airports(id: airport.id,
+                                                  iataCode: airport.iataCode,
+                                                  cityIataCode: airport.cityIataCode,
+                                                  latitude: airport.latitude,
+                                                  longitude: airport.longitude,
+                                                  airportName: airport.airportName,
+                                                  countryName: airport.countryName))
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        self.stopUpdateAnimation()
+        tableView.reloadData()
+    }
+    
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Update airports list")
-        refreshControl?.addTarget(self, action: #selector(fetchAirports), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(fetchAirportsFromNetwork), for: .valueChanged)
     }
 }
 

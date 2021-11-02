@@ -29,7 +29,6 @@ class ArrivalTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationItem.title = "Flights to " + airportIata
 
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true

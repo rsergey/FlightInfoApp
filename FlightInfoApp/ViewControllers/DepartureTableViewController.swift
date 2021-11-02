@@ -29,7 +29,6 @@ class DepartureTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationItem.title = "Flights from " + airportIata
 
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
