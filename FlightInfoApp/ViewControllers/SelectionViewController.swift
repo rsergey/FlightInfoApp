@@ -43,6 +43,7 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (iataTextField.text?.count ?? 0) > 2 {
             airportIata = iataTextField.text ?? ""
+            UserDefaults.standard.setValue(airportIata, forKey: "DefaultAirportIata")
             performSegue(withIdentifier: "showFlightsSegue", sender: nil)
         } else {
             showAlert()
