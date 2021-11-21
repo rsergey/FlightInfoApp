@@ -8,8 +8,10 @@
 import Foundation
 
 class NetworkManager {
+    // MARK: - Static Properties
     static let shared = NetworkManager()
     
+    // MARK: - Initialization
     private init() {}
     
     func fetchFlights(from url: URLs, key: Keys, type: FlyghtsViewKey, iata: String, with complition: @escaping (Result<[Flights], Error>) -> Void) {

@@ -71,6 +71,8 @@ class AirportListTableViewController: UITableViewController {
                     airport = airports[indexPath.row]
                 }
                 
+                DataManager.defaultAirportIata = airport.iataCode
+                
                 guard let tabBarController = segue.destination as? UITabBarController else { return }
                 tabBarController.navigationItem.title = "Airport • " + (airport.iataCode ?? "")
                 guard let viewControllers = tabBarController.viewControllers else { return }

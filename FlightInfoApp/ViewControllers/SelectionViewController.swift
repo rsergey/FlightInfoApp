@@ -20,6 +20,11 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
         iataTextField.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(animated)
+        prepareDefaultAirportIata()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
@@ -43,7 +48,7 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (iataTextField.text?.count ?? 0) > 2 {
             airportIata = iataTextField.text ?? ""
-            UserDefaults.standard.setValue(airportIata, forKey: "DefaultAirportIata")
+            DataManager.defaultAirportIata = airportIata
             performSegue(withIdentifier: "showFlightsSegue", sender: nil)
         } else {
             showAlert()
@@ -60,6 +65,12 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Private Methods
+    private func prepareDefaultAirportIata() {
+        guard let defaultAirportIata = DataManager.defaultAirportIata else { return }
+        iataTextField.text = defaultAirportIata
+        airportIata = defaultAirportIata
+    }
+    
     private func showAlert() {
         let alert = UIAlertController(title: "Wrong IATA code!",
                                       message: "IATA aiport code contains three letters.",
