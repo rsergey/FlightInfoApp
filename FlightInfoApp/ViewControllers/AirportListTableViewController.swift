@@ -166,7 +166,7 @@ class AirportListTableViewController: UITableViewController {
                 self.stopUpdateAnimation()
                 self.tableView.reloadData()
                 StorageManager.shared.clearAirports()
-                StorageManager.shared.save(airports: airports)
+                StorageManager.shared.saveAirports(airports: airports)
             case .failure(_):
                 self.stopUpdateAnimation()
                 self.networkFailedAlert()
@@ -175,7 +175,7 @@ class AirportListTableViewController: UITableViewController {
     }
     
     private func fetchAirportsFromStorage() {
-        StorageManager.shared.fetchData { result in
+        StorageManager.shared.fetchAirports { result in
             switch result {
             case .success(let airports):
                 self.airports = []

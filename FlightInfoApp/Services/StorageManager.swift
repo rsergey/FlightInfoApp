@@ -43,7 +43,7 @@ class StorageManager {
     
     // MARK: - Fetch / Save / Clear
     
-    func fetchData(completion: (Result<[Airport], Error>) -> Void) {
+    func fetchAirports(completion: (Result<[Airport], Error>) -> Void) {
         let fetchRequest: NSFetchRequest<Airport> = Airport.fetchRequest()
         do {
             let airports = try viewContext.fetch(fetchRequest)
@@ -53,7 +53,7 @@ class StorageManager {
         }
     }
     
-    func save(airports: [Airports]) {
+    func saveAirports(airports: [Airports]) {
         for airport in airports {
             guard let entityDescription = NSEntityDescription.entity(forEntityName: "Airport", in: viewContext) else { return }
             guard let airportEntity = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? Airport else { return }
@@ -77,6 +77,5 @@ class StorageManager {
             print(error.localizedDescription)
         }
     }
-    
     
 }

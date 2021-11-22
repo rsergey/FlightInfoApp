@@ -33,7 +33,7 @@ class ArrivalTableViewController: UITableViewController {
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
-        fecthArrivalFlights()
+        fecthArrivalFlightsFromNetwork()
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -128,7 +128,7 @@ class ArrivalTableViewController: UITableViewController {
         }
     }
     
-    @objc private func fecthArrivalFlights() {
+    @objc private func fecthArrivalFlightsFromNetwork() {
         NetworkManager.shared.fetchFlights(from: .flightsUrl,
                                            key: .accessKey,
                                            type: .arrival,
@@ -148,7 +148,7 @@ class ArrivalTableViewController: UITableViewController {
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Update flights list")
-        refreshControl?.addTarget(self, action: #selector(fecthArrivalFlights), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(fecthArrivalFlightsFromNetwork), for: .valueChanged)
     }
 }
 
