@@ -56,7 +56,7 @@ class StorageManager {
     
     func saveAirports(airports: [Airports]) {
         for airport in airports {
-            guard let entityDescription = NSEntityDescription.entity(forEntityName: "Airport", in: viewContext) else { return }
+            guard let entityDescription = NSEntityDescription.entity(forEntityName: "AirportsCoreDataEntity", in: viewContext) else { return }
             guard let airportEntity = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? AirportsCoreDataEntity else { return }
             airportEntity.airportName = airport.airportName
             airportEntity.cityIataCode = airport.cityIataCode
@@ -70,7 +70,7 @@ class StorageManager {
     }
     
     func clearAirports() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Airport")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AirportsCoreDataEntity")
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
             try viewContext.execute(batchDeleteRequest)
@@ -92,7 +92,7 @@ class StorageManager {
     
     func saveFlights(flights: [Flights]) {
         for flight in flights {
-            guard let entityDescription = NSEntityDescription.entity(forEntityName: "Flights", in: viewContext) else { return }
+            guard let entityDescription = NSEntityDescription.entity(forEntityName: "FlightsCoreDataEntity", in: viewContext) else { return }
             guard let flightsEntity = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? FlightsCoreDataEntity else { return }
             flightsEntity.flightStatus = flight.flightStatus
             flightsEntity.departure?.airport = flight.departure?.airport
@@ -108,7 +108,7 @@ class StorageManager {
     }
     
     func clearFlights() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Flights")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FlightsCoreDataEntity")
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
             try viewContext.execute(batchDeleteRequest)
