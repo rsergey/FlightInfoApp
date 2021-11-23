@@ -43,8 +43,9 @@ class StorageManager {
     
     // MARK: - Fetch / Save / Clear
     
-    func fetchAirports(completion: (Result<[Airport], Error>) -> Void) {
-        let fetchRequest: NSFetchRequest<Airport> = Airport.fetchRequest()
+    // Airports
+    func fetchAirports(completion: (Result<[AirportsCoreDataEntity], Error>) -> Void) {
+        let fetchRequest: NSFetchRequest<AirportsCoreDataEntity> = AirportsCoreDataEntity.fetchRequest()
         do {
             let airports = try viewContext.fetch(fetchRequest)
             completion(.success(airports))
@@ -56,7 +57,7 @@ class StorageManager {
     func saveAirports(airports: [Airports]) {
         for airport in airports {
             guard let entityDescription = NSEntityDescription.entity(forEntityName: "Airport", in: viewContext) else { return }
-            guard let airportEntity = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? Airport else { return }
+            guard let airportEntity = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? AirportsCoreDataEntity else { return }
             airportEntity.airportName = airport.airportName
             airportEntity.cityIataCode = airport.cityIataCode
             airportEntity.countryName = airport.countryName
@@ -78,4 +79,41 @@ class StorageManager {
         }
     }
     
+    // Flights
+    func fetchFlights(completion: (Result<[FlightsCoreDataEntity], Error>) -> Void) {
+        let fetchRequest: NSFetchRequest<FlightsCoreDataEntity> = FlightsCoreDataEntity.fetchRequest()
+        do {
+            let flights = try viewContext.fetch(fetchRequest)
+            completion(.success(flights))
+        } catch let error {
+            completion(.failure(error))
+        }
+    }
+    
+    func saveFlights(flights: [Flights]) {
+        for flight in flights {
+            guard let entityDescription = NSEntityDescription.entity(forEntityName: "Flights", in: viewContext) else { return }
+            guard let flightsEntity = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? FlightsCoreDataEntity else { return }
+            flightsEntity.flightStatus = flight.flightStatus
+            flightsEntity.departure?.airport = flight.departure?.airport
+            flightsEntity.departure?.iata = flight.departure?.iata
+            flightsEntity.departure?.scheduled = flight.departure?.scheduled
+            flightsEntity.arrival?.airport = flight.arrival?.airport
+            flightsEntity.arrival?.iata = flight.arrival?.iata
+            flightsEntity.arrival?.scheduled = flight.arrival?.scheduled
+            flightsEntity.airline?.name = flight.airline?.name
+            flightsEntity.flight?.iata = flight.flight?.iata
+            saveContext()
+        }
+    }
+    
+    func clearFlights() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Flights")
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try viewContext.execute(batchDeleteRequest)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 }

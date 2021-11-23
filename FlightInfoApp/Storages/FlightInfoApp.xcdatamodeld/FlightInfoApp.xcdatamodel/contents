@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1519" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Airport" representedClassName="Airport" syncable="YES" codeGenerationType="class">
+    <entity name="AirlineCoreDataEntity" representedClassName=".AirlineCoreDataEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="flights" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FlightsCoreDataEntity" inverseName="airline" inverseEntity="FlightsCoreDataEntity"/>
+    </entity>
+    <entity name="AirportsCoreDataEntity" representedClassName=".AirportsCoreDataEntity" syncable="YES" codeGenerationType="class">
         <attribute name="airportName" optional="YES" attributeType="String"/>
         <attribute name="cityIataCode" optional="YES" attributeType="String"/>
         <attribute name="countryName" optional="YES" attributeType="String"/>
@@ -9,7 +13,35 @@
         <attribute name="latitude" optional="YES" attributeType="String"/>
         <attribute name="longitude" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="ArrivalAirportCoreDataEntity" representedClassName=".ArrivalAirportCoreDataEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="airport" optional="YES" attributeType="String"/>
+        <attribute name="iata" optional="YES" attributeType="String"/>
+        <attribute name="scheduled" optional="YES" attributeType="String"/>
+        <relationship name="flights" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FlightsCoreDataEntity" inverseName="arrival" inverseEntity="FlightsCoreDataEntity"/>
+    </entity>
+    <entity name="DepartureAirportCoreDataEntity" representedClassName=".DepartureAirportCoreDataEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="airport" optional="YES" attributeType="String"/>
+        <attribute name="iata" optional="YES" attributeType="String"/>
+        <attribute name="scheduled" optional="YES" attributeType="String"/>
+        <relationship name="flights" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FlightsCoreDataEntity" inverseName="departure" inverseEntity="FlightsCoreDataEntity"/>
+    </entity>
+    <entity name="FlightCoreDataEntity" representedClassName=".FlightCoreDataEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="iata" optional="YES" attributeType="String"/>
+        <relationship name="flights" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FlightsCoreDataEntity" inverseName="flight" inverseEntity="FlightsCoreDataEntity"/>
+    </entity>
+    <entity name="FlightsCoreDataEntity" representedClassName=".FlightsCoreDataEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="flightStatus" optional="YES" attributeType="String"/>
+        <relationship name="airline" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AirlineCoreDataEntity" inverseName="flights" inverseEntity="AirlineCoreDataEntity"/>
+        <relationship name="arrival" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ArrivalAirportCoreDataEntity" inverseName="flights" inverseEntity="ArrivalAirportCoreDataEntity"/>
+        <relationship name="departure" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DepartureAirportCoreDataEntity" inverseName="flights" inverseEntity="DepartureAirportCoreDataEntity"/>
+        <relationship name="flight" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FlightCoreDataEntity" inverseName="flights" inverseEntity="FlightCoreDataEntity"/>
+    </entity>
     <elements>
-        <element name="Airport" positionX="-422.703125" positionY="-95.578125" width="218.68359375" height="148"/>
+        <element name="AirlineCoreDataEntity" positionX="-417.06640625" positionY="104.4921875" width="128" height="73"/>
+        <element name="AirportsCoreDataEntity" positionX="-447.63671875" positionY="-123.26171875" width="218.68359375" height="148"/>
+        <element name="ArrivalAirportCoreDataEntity" positionX="-437.33203125" positionY="188.125" width="128" height="103"/>
+        <element name="DepartureAirportCoreDataEntity" positionX="-461.859375" positionY="300.42578125" width="128" height="103"/>
+        <element name="FlightCoreDataEntity" positionX="-483.03515625" positionY="418.2109375" width="128" height="73"/>
+        <element name="FlightsCoreDataEntity" positionX="-677.62890625" positionY="8.7578125" width="128" height="118"/>
     </elements>
 </model>

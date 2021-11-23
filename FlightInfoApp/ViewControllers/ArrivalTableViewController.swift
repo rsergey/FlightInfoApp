@@ -25,6 +25,12 @@ class ArrivalTableViewController: UITableViewController {
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
+    lazy private var dateFormatter: DateFormatter = {
+       let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }()
     
     // MARK: - Override Methods
     override func viewDidLoad() {
@@ -126,6 +132,10 @@ class ArrivalTableViewController: UITableViewController {
                 self.refreshControl?.endRefreshing()
             }
         }
+    }
+    
+    private func fecthArrivalFlightsFromStorage() {
+        
     }
     
     @objc private func fecthArrivalFlightsFromNetwork() {

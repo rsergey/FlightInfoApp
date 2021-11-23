@@ -19,7 +19,7 @@ struct ResponseFlights: Decodable {
 
 struct Flights: Decodable {
 //    let flightDate: String?
-//    let flightStatus: String?
+    let flightStatus: String?
     let departure: DepartureAirport?
     let arrival: ArrivalAirport?
     let airline: Airline?
