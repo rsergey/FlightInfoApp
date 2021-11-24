@@ -14,7 +14,7 @@ class NetworkManager {
     // MARK: - Initialization
     private init() {}
     
-    func fetchFlights(from url: URLs, key: Keys, type: FlyghtsViewKey, iata: String, with complition: @escaping (Result<[Flights], Error>) -> Void) {
+    func fetchFlights(from url: URLs, key: Keys, type: FlightsViewKey, iata: String, with complition: @escaping (Result<[Flights], Error>) -> Void) {
         let urlAdress = url.rawValue + key.rawValue + type.rawValue + iata
         guard let url = URL(string: urlAdress) else { return }
         

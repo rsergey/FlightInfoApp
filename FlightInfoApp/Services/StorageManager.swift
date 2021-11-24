@@ -80,8 +80,9 @@ class StorageManager {
     }
     
     // Flights
-    func fetchFlights(completion: (Result<[FlightsCoreDataEntity], Error>) -> Void) {
+    func fetchFlights(flightType: FlightType, completion: (Result<[FlightsCoreDataEntity], Error>) -> Void) {
         let fetchRequest: NSFetchRequest<FlightsCoreDataEntity> = FlightsCoreDataEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "flightType = %@", flightType.rawValue)
         do {
             let flights = try viewContext.fetch(fetchRequest)
             completion(.success(flights))
@@ -90,10 +91,12 @@ class StorageManager {
         }
     }
     
-    func saveFlights(flights: [Flights]) {
+    func saveFlights(flights: [Flights], flightType: FlightType, date: Date) {
         for flight in flights {
             guard let entityDescription = NSEntityDescription.entity(forEntityName: "FlightsCoreDataEntity", in: viewContext) else { return }
             guard let flightsEntity = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? FlightsCoreDataEntity else { return }
+            flightsEntity.date = date
+            flightsEntity.flightType = flightType.rawValue
             flightsEntity.flightStatus = flight.flightStatus
             flightsEntity.departure?.airport = flight.departure?.airport
             flightsEntity.departure?.iata = flight.departure?.iata
@@ -107,8 +110,9 @@ class StorageManager {
         }
     }
     
-    func clearFlights() {
+    func clearFlights(flightType: FlightType) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FlightsCoreDataEntity")
+        fetchRequest.predicate = NSPredicate(format: "flightType = %@", flightType.rawValue)
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
             try viewContext.execute(batchDeleteRequest)
