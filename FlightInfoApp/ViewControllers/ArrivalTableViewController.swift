@@ -25,12 +25,6 @@ class ArrivalTableViewController: UITableViewController {
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
-    lazy private var dateFormatter: DateFormatter = {
-       let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
-    }()
     
     // MARK: - Override Methods
     override func viewDidLoad() {
@@ -134,8 +128,32 @@ class ArrivalTableViewController: UITableViewController {
         }
     }
     
-    private func fecthArrivalFlightsFromStorage() {
+    private func getArrivalFlights() {
         
+    }
+    
+    private func fecthArrivalFlightsFromStorage() {
+        StorageManager.shared.fetchFlights(flightType: .arrival) { result in
+            switch result {
+            case .success(let flights):
+                self.arrivalFlights = []
+                for flight in flights {
+                    self.arrivalFlights.append(Flights(flightStatus: flight.flightStatus,
+                                                       departure: DepartureAirport(airport: flight.departure?.airport,
+                                                                                   iata: flight.departure?.iata,
+                                                                                   scheduled: flight.departure?.scheduled),
+                                                       arrival: ArrivalAirport(airport: flight.arrival?.airport,
+                                                                               iata: flight.arrival?.iata,
+                                                                               scheduled: flight.arrival?.scheduled),
+                                                       airline: Airline(name: flight.airline?.name),
+                                                       flight: Flight(iata: flight.flight?.iata)))
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        self.stopUpdateAnimation()
+        tableView.reloadData()
     }
     
     @objc private func fecthArrivalFlightsFromNetwork() {
