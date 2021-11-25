@@ -43,6 +43,6 @@
         <element name="ArrivalAirportCoreDataEntity" positionX="-437.33203125" positionY="188.125" width="128" height="103"/>
         <element name="DepartureAirportCoreDataEntity" positionX="-461.859375" positionY="300.42578125" width="128" height="103"/>
         <element name="FlightCoreDataEntity" positionX="-483.03515625" positionY="418.2109375" width="128" height="73"/>
-        <element name="FlightsCoreDataEntity" positionX="-677.62890625" positionY="8.7578125" width="128" height="28"/>
+        <element name="FlightsCoreDataEntity" positionX="-677.62890625" positionY="8.7578125" width="128" height="133"/>
     </elements>
 </model>

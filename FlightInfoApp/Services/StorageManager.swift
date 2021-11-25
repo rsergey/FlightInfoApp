@@ -91,7 +91,7 @@ class StorageManager {
         }
     }
     
-    func saveFlights(flights: [Flights], flightType: FlightType, date: Date) {
+    func saveFlights(flights: [Flights], flightType: FlightType) {
         for flight in flights {
             
             let departureEntity = DepartureAirportCoreDataEntity(context: viewContext)

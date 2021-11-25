@@ -129,7 +129,20 @@ class ArrivalTableViewController: UITableViewController {
     }
     
     private func getArrivalFlights() {
-        fecthArrivalFlightsFromStorage()
+        let currentDate = Date()
+        guard let storageAirportIata = DataManager.storageAirportIata else {
+            fecthArrivalFlightsFromNetwork()
+            return
+        }
+        guard let storageDate = DataManager.storageDate else {
+            fecthArrivalFlightsFromNetwork()
+            return
+        }
+        if airportIata == storageAirportIata, storageDate.distance(to: currentDate) < 3600 {
+            fecthArrivalFlightsFromStorage()
+        } else {
+            fecthArrivalFlightsFromNetwork()
+        }
     }
     
     private func fecthArrivalFlightsFromStorage() {
@@ -166,9 +179,11 @@ class ArrivalTableViewController: UITableViewController {
                 self.arrivalFlights = flights
                 self.stopUpdateAnimation()
                 self.tableView.reloadData()
-                let date = Date()
+                DataManager.storageDate = Date()
+                DataManager.storageAirportIata = self.airportIata
                 StorageManager.shared.clearFlights(flightType: .arrival)
-                StorageManager.shared.saveFlights(flights: flights, flightType: .arrival, date: date)
+                StorageManager.shared.saveFlights(flights: flights,
+                                                  flightType: .arrival)
             case .failure(_):
                 self.stopUpdateAnimation()
                 self.networkFailedAlert()

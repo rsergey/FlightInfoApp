@@ -9,7 +9,7 @@ import Foundation
 
 class DataManager {
     // MARK: - Static Properties
-    static var defaultAirportIata: String! {
+    static var defaultAirportIata: String? {
         get {
             UserDefaults.standard.string(forKey: "DefaultAirportIata")
         }
@@ -18,6 +18,32 @@ class DataManager {
                 UserDefaults.standard.setValue(airportIata, forKey: "DefaultAirportIata")
             } else {
                 UserDefaults.standard.removeObject(forKey: "DefaultAirportIata")
+            }
+        }
+    }
+    
+    static var storageAirportIata: String? {
+        get {
+            UserDefaults.standard.string(forKey: "StorageAirportIata")
+        }
+        set {
+            if let airportIata = newValue {
+                UserDefaults.standard.setValue(airportIata, forKey: "StorageAirportIata")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "StorageAirportIata")
+            }
+        }
+    }
+    
+    static var storageDate: Date? {
+        get {
+            Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "StorageDate"))
+        }
+        set {
+            if let date = newValue {
+                UserDefaults.standard.setValue(date.timeIntervalSince1970, forKey: "StorageDate")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "StorageDate")
             }
         }
     }
