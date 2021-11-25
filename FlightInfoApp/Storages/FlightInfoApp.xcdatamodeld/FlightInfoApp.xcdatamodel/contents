@@ -30,7 +30,6 @@
         <relationship name="flights" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FlightsCoreDataEntity" inverseName="flight" inverseEntity="FlightsCoreDataEntity"/>
     </entity>
     <entity name="FlightsCoreDataEntity" representedClassName=".FlightsCoreDataEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="flightStatus" optional="YES" attributeType="String"/>
         <attribute name="flightType" optional="YES" attributeType="String"/>
         <relationship name="airline" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AirlineCoreDataEntity" inverseName="flights" inverseEntity="AirlineCoreDataEntity"/>
@@ -44,6 +43,6 @@
         <element name="ArrivalAirportCoreDataEntity" positionX="-437.33203125" positionY="188.125" width="128" height="103"/>
         <element name="DepartureAirportCoreDataEntity" positionX="-461.859375" positionY="300.42578125" width="128" height="103"/>
         <element name="FlightCoreDataEntity" positionX="-483.03515625" positionY="418.2109375" width="128" height="73"/>
-        <element name="FlightsCoreDataEntity" positionX="-677.62890625" positionY="8.7578125" width="128" height="148"/>
+        <element name="FlightsCoreDataEntity" positionX="-677.62890625" positionY="8.7578125" width="128" height="28"/>
     </elements>
 </model>

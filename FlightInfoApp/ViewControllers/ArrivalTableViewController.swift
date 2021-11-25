@@ -33,7 +33,7 @@ class ArrivalTableViewController: UITableViewController {
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
-        fecthArrivalFlightsFromNetwork()
+        getArrivalFlights()
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -129,7 +129,7 @@ class ArrivalTableViewController: UITableViewController {
     }
     
     private func getArrivalFlights() {
-        
+        fecthArrivalFlightsFromStorage()
     }
     
     private func fecthArrivalFlightsFromStorage() {
@@ -166,6 +166,9 @@ class ArrivalTableViewController: UITableViewController {
                 self.arrivalFlights = flights
                 self.stopUpdateAnimation()
                 self.tableView.reloadData()
+                let date = Date()
+                StorageManager.shared.clearFlights(flightType: .arrival)
+                StorageManager.shared.saveFlights(flights: flights, flightType: .arrival, date: date)
             case .failure(_):
                 self.stopUpdateAnimation()
                 self.networkFailedAlert()

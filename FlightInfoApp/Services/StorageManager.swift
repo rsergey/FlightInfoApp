@@ -93,19 +93,31 @@ class StorageManager {
     
     func saveFlights(flights: [Flights], flightType: FlightType, date: Date) {
         for flight in flights {
-            guard let entityDescription = NSEntityDescription.entity(forEntityName: "FlightsCoreDataEntity", in: viewContext) else { return }
-            guard let flightsEntity = NSManagedObject(entity: entityDescription, insertInto: viewContext) as? FlightsCoreDataEntity else { return }
-            flightsEntity.date = date
+            
+            let departureEntity = DepartureAirportCoreDataEntity(context: viewContext)
+            departureEntity.airport = flight.departure?.airport
+            departureEntity.iata = flight.departure?.iata
+            departureEntity.scheduled = flight.departure?.scheduled
+            
+            let arrivalEntity = ArrivalAirportCoreDataEntity(context: viewContext)
+            arrivalEntity.airport = flight.arrival?.airport
+            arrivalEntity.iata = flight.arrival?.iata
+            arrivalEntity.scheduled = flight.arrival?.scheduled
+            
+            let airlineEntity = AirlineCoreDataEntity(context: viewContext)
+            airlineEntity.name = flight.airline?.name
+            
+            let flightEntity = FlightCoreDataEntity(context: viewContext)
+            flightEntity.iata = flight.flight?.iata
+            
+            let flightsEntity = FlightsCoreDataEntity(context: viewContext)
             flightsEntity.flightType = flightType.rawValue
             flightsEntity.flightStatus = flight.flightStatus
-            flightsEntity.departure?.airport = flight.departure?.airport
-            flightsEntity.departure?.iata = flight.departure?.iata
-            flightsEntity.departure?.scheduled = flight.departure?.scheduled
-            flightsEntity.arrival?.airport = flight.arrival?.airport
-            flightsEntity.arrival?.iata = flight.arrival?.iata
-            flightsEntity.arrival?.scheduled = flight.arrival?.scheduled
-            flightsEntity.airline?.name = flight.airline?.name
-            flightsEntity.flight?.iata = flight.flight?.iata
+            flightsEntity.departure = departureEntity
+            flightsEntity.arrival = arrivalEntity
+            flightsEntity.airline = airlineEntity
+            flightsEntity.flight = flightEntity
+            
             saveContext()
         }
     }
