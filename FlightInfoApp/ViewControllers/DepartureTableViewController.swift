@@ -194,6 +194,7 @@ class DepartureTableViewController: UITableViewController {
         }
     }
     
+    // Alerts
     private func networkFailedAlert() {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Network request failed!",

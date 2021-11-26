@@ -89,6 +89,8 @@ class AirportListTableViewController: UITableViewController {
     }
     
     // MARK: - Private Methods
+    
+    // Interface
     private func prepareDataForText(airport: Airports) -> String {
         var text = " → " + (airport.airportName ?? "-")
         text += " (" + (airport.iataCode ?? "-") + ")"
@@ -99,33 +101,10 @@ class AirportListTableViewController: UITableViewController {
         (airport.countryName ?? "-") + " (city iata: " + (airport.cityIataCode ?? "-") + ")"
     }
     
-    private func networkFailedAlert() {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Network request failed!",
-                                          message: "Please try again.",
-                                          preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK",
-                                         style: .default)
-            alert.addAction(okAction)
-            self.present(alert, animated: true)
-        }
-    }
-    
-    private func warningNewRequestAlert() {
-        let alert = UIAlertController(title: "Updating airports list from network.",
-                                      message: "The full list of airports rarely changes. Are you sure you want to update the data?",
-                                      preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Update",
-                                     style: .default) { _ in
-            self.fetchAirportsFromNetwork()
-        }
-        alert.addAction(okAction)
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .cancel) { _ in
-            self.stopUpdateAnimation()
-        }
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true)
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Update airports list")
+        refreshControl?.addTarget(self, action: #selector(fetchDataFromNetwork), for: .valueChanged)
     }
     
     private func stopUpdateAnimation() {
@@ -137,12 +116,7 @@ class AirportListTableViewController: UITableViewController {
         }
     }
     
-    private func setupRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: "Update airports list")
-        refreshControl?.addTarget(self, action: #selector(fetchDataFromNetwork), for: .valueChanged)
-    }
-    
+    // Get data
     private func getAirports() {
         activityIndicator.startAnimating()
         fetchAirportsFromStorage()
@@ -151,6 +125,30 @@ class AirportListTableViewController: UITableViewController {
         }
     }
     
+    // Storage
+    private func fetchAirportsFromStorage() {
+        StorageManager.shared.fetchAirports { result in
+            switch result {
+            case .success(let airports):
+                self.airports = []
+                for airport in airports {
+                    self.airports.append(Airports(id: airport.id,
+                                                  iataCode: airport.iataCode,
+                                                  cityIataCode: airport.cityIataCode,
+                                                  latitude: airport.latitude,
+                                                  longitude: airport.longitude,
+                                                  airportName: airport.airportName,
+                                                  countryName: airport.countryName))
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        self.stopUpdateAnimation()
+        tableView.reloadData()
+    }
+    
+    // Network
     @objc private func fetchDataFromNetwork() {
         if !airports.isEmpty {
             warningNewRequestAlert()
@@ -174,28 +172,35 @@ class AirportListTableViewController: UITableViewController {
         }
     }
     
-    private func fetchAirportsFromStorage() {
-        StorageManager.shared.fetchAirports { result in
-            switch result {
-            case .success(let airports):
-                self.airports = []
-                for airport in airports {
-                    self.airports.append(Airports(id: airport.id,
-                                                  iataCode: airport.iataCode,
-                                                  cityIataCode: airport.cityIataCode,
-                                                  latitude: airport.latitude,
-                                                  longitude: airport.longitude,
-                                                  airportName: airport.airportName,
-                                                  countryName: airport.countryName))
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+    // Alerts
+    private func warningNewRequestAlert() {
+        let alert = UIAlertController(title: "Updating airports list from network.",
+                                      message: "The full list of airports rarely changes. Are you sure you want to update the data?",
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Update",
+                                     style: .default) { _ in
+            self.fetchAirportsFromNetwork()
         }
-        self.stopUpdateAnimation()
-        tableView.reloadData()
+        alert.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel) { _ in
+            self.stopUpdateAnimation()
+        }
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
     }
     
+    private func networkFailedAlert() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Network request failed!",
+                                          message: "Please try again.",
+                                          preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .default)
+            alert.addAction(okAction)
+            self.present(alert, animated: true)
+        }
+    }
 }
 
 // MARK: - Extensions
