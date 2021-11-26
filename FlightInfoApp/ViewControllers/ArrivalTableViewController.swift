@@ -82,6 +82,8 @@ class ArrivalTableViewController: UITableViewController {
     }
     
     // MARK: - Private Methods
+    
+    // Interface
     private func prepareDataForText(arrivalFlight: Flights) -> String {
         var time = ""
         let flightIata = arrivalFlight.flight?.iata ?? ""
@@ -107,16 +109,10 @@ class ArrivalTableViewController: UITableViewController {
         return airline
     }
     
-    private func networkFailedAlert() {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Network request failed!",
-                                          message: "Please try again.",
-                                          preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK",
-                                         style: .default)
-            alert.addAction(okAction)
-            self.present(alert, animated: true)
-        }
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Update flights list")
+        refreshControl?.addTarget(self, action: #selector(fecthArrivalFlightsFromNetwork), for: .valueChanged)
     }
     
     private func stopUpdateAnimation() {
@@ -128,17 +124,19 @@ class ArrivalTableViewController: UITableViewController {
         }
     }
     
+    // Get data
     private func getArrivalFlights() {
         let currentDate = Date()
         guard let storageAirportIata = DataManager.storageAirportIata else {
             fecthArrivalFlightsFromNetwork()
             return
         }
-        guard let storageDate = DataManager.storageDate else {
+        guard let storageDate = DataManager.storageArrivalDate else {
             fecthArrivalFlightsFromNetwork()
             return
         }
         if airportIata == storageAirportIata,
+           DataManager.storageArrivalFlights,
            storageDate.distance(to: currentDate) < DataManager.storageTimeInterval {
             fecthArrivalFlightsFromStorage()
         } else {
@@ -146,6 +144,7 @@ class ArrivalTableViewController: UITableViewController {
         }
     }
     
+    // Storage
     private func fecthArrivalFlightsFromStorage() {
         StorageManager.shared.fetchFlights(flightType: .arrival) { result in
             switch result {
@@ -170,6 +169,7 @@ class ArrivalTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // Network
     @objc private func fecthArrivalFlightsFromNetwork() {
         NetworkManager.shared.fetchFlights(from: .flightsUrl,
                                            key: .accessKey,
@@ -180,7 +180,8 @@ class ArrivalTableViewController: UITableViewController {
                 self.arrivalFlights = flights
                 self.stopUpdateAnimation()
                 self.tableView.reloadData()
-                DataManager.storageDate = Date()
+                DataManager.storageArrivalDate = Date()
+                DataManager.storageArrivalFlights = true
                 DataManager.storageAirportIata = self.airportIata
                 StorageManager.shared.clearFlights(flightType: .arrival)
                 StorageManager.shared.saveFlights(flights: flights,
@@ -192,10 +193,16 @@ class ArrivalTableViewController: UITableViewController {
         }
     }
     
-    private func setupRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: "Update flights list")
-        refreshControl?.addTarget(self, action: #selector(fecthArrivalFlightsFromNetwork), for: .valueChanged)
+    private func networkFailedAlert() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Network request failed!",
+                                          message: "Please try again.",
+                                          preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .default)
+            alert.addAction(okAction)
+            self.present(alert, animated: true)
+        }
     }
 }
 

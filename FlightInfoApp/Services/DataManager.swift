@@ -35,15 +35,47 @@ class DataManager {
         }
     }
     
-    static var storageDate: Date? {
+    static var storageArrivalFlights: Bool {
         get {
-            Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "StorageDate"))
+            UserDefaults.standard.bool(forKey: "StorageArrivalFlights")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "StorageArrivalFlights")
+        }
+    }
+    
+    static var storageDepartureFlights: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "StorageDepartureFlights")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "StorageDepartureFlights")
+        }
+    }
+    
+    
+    static var storageArrivalDate: Date? {
+        get {
+            Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "StorageArrivalDate"))
         }
         set {
             if let date = newValue {
-                UserDefaults.standard.setValue(date.timeIntervalSince1970, forKey: "StorageDate")
+                UserDefaults.standard.setValue(date.timeIntervalSince1970, forKey: "StorageArrivalDate")
             } else {
-                UserDefaults.standard.removeObject(forKey: "StorageDate")
+                UserDefaults.standard.removeObject(forKey: "StorageArrivalDate")
+            }
+        }
+    }
+    
+    static var storageDepartureDate: Date? {
+        get {
+            Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "StorageDepartureDate"))
+        }
+        set {
+            if let date = newValue {
+                UserDefaults.standard.setValue(date.timeIntervalSince1970, forKey: "StorageDepartureDate")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "StorageDepartureDate")
             }
         }
     }
