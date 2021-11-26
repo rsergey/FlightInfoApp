@@ -48,6 +48,16 @@ class DataManager {
         }
     }
     
+    static var storageTimeInterval: TimeInterval {
+        get {
+            let interval = UserDefaults.standard.double(forKey: "storageTimeInterval")
+            return interval == 0 ? 3600 : interval
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "storageTimeInterval")
+        }
+    }
+    
     // MARK: - Initialization
     private init() {}
     

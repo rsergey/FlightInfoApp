@@ -138,7 +138,8 @@ class ArrivalTableViewController: UITableViewController {
             fecthArrivalFlightsFromNetwork()
             return
         }
-        if airportIata == storageAirportIata, storageDate.distance(to: currentDate) < 3600 {
+        if airportIata == storageAirportIata,
+           storageDate.distance(to: currentDate) < DataManager.storageTimeInterval {
             fecthArrivalFlightsFromStorage()
         } else {
             fecthArrivalFlightsFromNetwork()
