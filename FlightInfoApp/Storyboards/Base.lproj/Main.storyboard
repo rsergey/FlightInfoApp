@@ -139,7 +139,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jqg-KV-HMR">
                                         <rect key="frame" x="0.0" y="40.5" width="250" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="↓ 3 hours of flight data storage" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bx-s7-90j">
                                         <rect key="frame" x="0.0" y="94.5" width="250" height="20.5"/>
@@ -173,6 +173,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="671-3I-EJd"/>
+                    <connections>
+                        <outlet property="apiKeyTextField" destination="jqg-KV-HMR" id="e69-5V-W0b"/>
+                        <outlet property="storageTimeLabel" destination="1Bx-s7-90j" id="BAC-PY-Zhc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kg-Or-Yc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -424,7 +428,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wNo-f4-Grc"/>
+        <segue reference="kcq-x1-VpO"/>
         <segue reference="9lp-9U-lSt"/>
     </inferredMetricsTieBreakers>
     <resources>
