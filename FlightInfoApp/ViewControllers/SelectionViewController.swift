@@ -57,7 +57,7 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let set = NSCharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwzyz").inverted
+        let set = NSCharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZ").inverted
         let maxLength = 3
         let currentString = (textField.text ?? "") as NSString
         let newString : NSString = currentString.replacingCharacters(in: range, with: string) as NSString

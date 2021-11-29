@@ -141,14 +141,46 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="↓ 3 hours of flight data storage" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bx-s7-90j">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="JZI-9x-Ytn">
                                         <rect key="frame" x="0.0" y="94.5" width="250" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ↓" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otB-0k-8av">
+                                                <rect key="frame" x="0.0" y="0.0" width="17.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylh-wt-2Ef">
+                                                <rect key="frame" x="21.5" y="0.0" width="18" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="18" id="Blw-vs-Uwf"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEN-aa-1lP">
+                                                <rect key="frame" x="43.5" y="0.0" width="44" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="9ry-TP-RmC"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="of flight data storage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OC2-Bk-Bq6">
+                                                <rect key="frame" x="91.5" y="0.0" width="158.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="12" translatesAutoresizingMaskIntoConstraints="NO" id="6lw-HE-kZz">
                                         <rect key="frame" x="-2" y="135" width="254" height="31"/>
+                                        <connections>
+                                            <action selector="storageTimeSliderValueUpdated:" destination="MPW-yw-HSd" eventType="valueChanged" id="dFf-0k-dei"/>
+                                        </connections>
                                     </slider>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="opY-cj-zFz">
                                         <rect key="frame" x="0.0" y="185" width="250" height="33"/>
@@ -169,13 +201,17 @@
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="CfE-lX-kBF" firstAttribute="centerX" secondItem="0sG-lY-C29" secondAttribute="centerX" id="i0b-FV-tS1"/>
-                            <constraint firstItem="CfE-lX-kBF" firstAttribute="centerY" secondItem="0sG-lY-C29" secondAttribute="centerY" constant="-150" id="pn4-UB-D32"/>
+                            <constraint firstItem="CfE-lX-kBF" firstAttribute="centerY" secondItem="0sG-lY-C29" secondAttribute="centerY" constant="-150" id="pn4-UB-D32">
+                                <variation key="heightClass=compact" constant="-40"/>
+                            </constraint>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="671-3I-EJd"/>
                     <connections>
                         <outlet property="apiKeyTextField" destination="jqg-KV-HMR" id="e69-5V-W0b"/>
-                        <outlet property="storageTimeLabel" destination="1Bx-s7-90j" id="BAC-PY-Zhc"/>
+                        <outlet property="storageTimeNumberLabel" destination="ylh-wt-2Ef" id="JWG-OI-op4"/>
+                        <outlet property="storageTimeSlider" destination="6lw-HE-kZz" id="5y2-Pj-mmp"/>
+                        <outlet property="storageTimeTextLabel" destination="sEN-aa-1lP" id="ejL-fV-scy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kg-Or-Yc5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

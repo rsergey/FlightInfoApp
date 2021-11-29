@@ -10,7 +10,9 @@ import UIKit
 class SettingsViewController: UIViewController, UITextFieldDelegate {
     // MARK: - IBOutlets
     @IBOutlet weak var apiKeyTextField: UITextField!
-    @IBOutlet weak var storageTimeLabel: UILabel!
+    @IBOutlet weak var storageTimeNumberLabel: UILabel!
+    @IBOutlet weak var storageTimeTextLabel: UILabel!
+    @IBOutlet weak var storageTimeSlider: UISlider!
     
     // MARK: - Override Methods
     override func viewDidLoad() {
@@ -32,13 +34,33 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
             }
     }
     
+    @IBAction func storageTimeSliderValueUpdated(_ sender: UISlider) {
+        let storageTimeInterval = sender.value.rounded()
+        sender.value = storageTimeInterval
+        DataManager.storageTimeInterval = Double(storageTimeInterval * 3600)
+        setStorageTimeLabelText(storageTimeValue: Int(storageTimeInterval))
+    }
+    
     // MARK: - Private Methods
     private func prepareApiKey() {
         
     }
     
     private func prepareStorageTimeInterval() {
-        
+        let storageTimeInterval = Float(DataManager.storageTimeInterval / 3600)        
+        storageTimeSlider.setValue(storageTimeInterval, animated: true)
+        setStorageTimeLabelText(storageTimeValue: Int(storageTimeInterval))
+    }
+    
+    private func setStorageTimeLabelText(storageTimeValue: Int) {
+        switch storageTimeValue {
+        case 1:
+            storageTimeNumberLabel.text = "\(storageTimeValue)"
+            storageTimeTextLabel.text = "hour"
+        default:
+            storageTimeNumberLabel.text = "\(storageTimeValue)"
+            storageTimeTextLabel.text = "hours"
+        }
     }
     
     // MARK: - Internal Methods
