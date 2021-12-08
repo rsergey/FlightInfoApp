@@ -76,7 +76,7 @@ class DepartureTableViewController: UITableViewController {
                 flight = departureFlights[indexPath.row]
             }
             
-            guard let detailsVC = segue.destination as? DetailsViewController else { return }
+            guard let detailsVC = segue.destination as? DetailsTableViewController else { return }
             detailsVC.flight = flight
         }
     }

@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		A534565426C3048D00B3048D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A534565326C3048D00B3048D /* NetworkManager.swift */; };
 		A54C6AE82729D32000E6CD24 /* FlightInfoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A54C6AE62729D32000E6CD24 /* FlightInfoApp.xcdatamodeld */; };
+		A550E2132760DA5400AEE458 /* DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A550E2122760DA5400AEE458 /* DetailsTableViewController.swift */; };
 		A576170A27247940003969AD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576170927247940003969AD /* SettingsViewController.swift */; };
-		A576170F27247A61003969AD /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576170E27247A61003969AD /* DetailsViewController.swift */; };
 		A5BD84EE26BE9DE600CC6FE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD84ED26BE9DE600CC6FE8 /* AppDelegate.swift */; };
 		A5BD84F026BE9DE600CC6FE8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD84EF26BE9DE600CC6FE8 /* SceneDelegate.swift */; };
 		A5BD84F226BE9DE600CC6FE8 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD84F126BE9DE600CC6FE8 /* SelectionViewController.swift */; };
@@ -30,8 +30,8 @@
 /* Begin PBXFileReference section */
 		A534565326C3048D00B3048D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A54C6AE72729D32000E6CD24 /* FlightInfoApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlightInfoApp.xcdatamodel; sourceTree = "<group>"; };
+		A550E2122760DA5400AEE458 /* DetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewController.swift; sourceTree = "<group>"; };
 		A576170927247940003969AD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		A576170E27247A61003969AD /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		A5BD84EA26BE9DE600CC6FE8 /* FlightInfoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightInfoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BD84ED26BE9DE600CC6FE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5BD84EF26BE9DE600CC6FE8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 				A5BD850D26BF247500CC6FE8 /* ArrivalTableViewController.swift */,
 				A5BD851026BF249C00CC6FE8 /* DepartureTableViewController.swift */,
 				A576170927247940003969AD /* SettingsViewController.swift */,
-				A576170E27247A61003969AD /* DetailsViewController.swift */,
+				A550E2122760DA5400AEE458 /* DetailsTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -230,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5BD84F226BE9DE600CC6FE8 /* SelectionViewController.swift in Sources */,
+				A550E2132760DA5400AEE458 /* DetailsTableViewController.swift in Sources */,
 				A54C6AE82729D32000E6CD24 /* FlightInfoApp.xcdatamodeld in Sources */,
 				A5E9583826D68709009AA293 /* DataManager.swift in Sources */,
 				A5BD84EE26BE9DE600CC6FE8 /* AppDelegate.swift in Sources */,
@@ -241,7 +242,6 @@
 				A5E9582D26D66A37009AA293 /* Airports.swift in Sources */,
 				A5BD84F026BE9DE600CC6FE8 /* SceneDelegate.swift in Sources */,
 				A576170A27247940003969AD /* SettingsViewController.swift in Sources */,
-				A576170F27247A61003969AD /* DetailsViewController.swift in Sources */,
 				A5BD851826BF2DC500CC6FE8 /* Flights.swift in Sources */,
 				A5BD851126BF249C00CC6FE8 /* DepartureTableViewController.swift in Sources */,
 			);
