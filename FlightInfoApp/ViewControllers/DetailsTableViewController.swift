@@ -17,12 +17,12 @@ class DetailsTableViewController: UITableViewController {
         [FlightMenu(title: "Flight Status",
                     items: [flight.flightStatus ?? "-"],
                     isHidden: false),
-        FlightMenu(title: "Departure Airport",
+        FlightMenu(title: "Departure",
                    items: [flight.departure?.airport ?? "-",
                            flight.departure?.iata ?? "-",
                            flight.departure?.scheduled ?? "-"],
                    isHidden: false),
-        FlightMenu(title: "Arrival Airport",
+        FlightMenu(title: "Arrival",
                    items: [flight.arrival?.airport ?? "-",
                            flight.arrival?.iata ?? "-",
                            flight.arrival?.scheduled ?? "-"],
@@ -44,29 +44,25 @@ class DetailsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        44
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        flightData[section].title
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if flightData[indexPath.section].isHidden {
-            return 0
-        } else {
-            return 44
-        }
-    }
-    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return flightData.count
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if flightData[section].isHidden {
+            return flightData[section].title + " ↓"
+        } else {
+            return flightData[section].title + " ↑"
+        }
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return flightData[section].items.count
+        if flightData[section].isHidden {
+            return 0
+        } else {
+            return flightData[section].items.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
