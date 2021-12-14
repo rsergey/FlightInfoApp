@@ -35,15 +35,22 @@ class DetailsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let stackView = UIStackView()
-        stackView.backgroundColor = UIColor.systemGray5
-
-        let label = UILabel()
+        let headerView = UITableViewHeaderFooterView()
+//        headerView.textLabel?.text = flightData[section].title
+        
+        let label = UILabel(frame: CGRect(x: 40,
+                                          y: 0,
+                                          width: 300,
+                                          height: 40))
         label.text = flightData[section].title
+        label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 17.0)
-        stackView.addArrangedSubview(label)
+        headerView.addSubview(label)
 
-        let button = UIButton()
+        let button = UIButton(frame: CGRect(x: 0,
+                                            y: 0,
+                                            width: 40,
+                                            height: 40))
         if flightData[section].isHidden {
             button.setImage(UIImage(systemName: "chevron.down.circle"), for: .normal)
         } else {
@@ -51,9 +58,9 @@ class DetailsTableViewController: UITableViewController {
         }
         button.tag = section
         button.addTarget(self, action: #selector(toggleFlightMenu), for: .touchUpInside)
-        stackView.addArrangedSubview(button)
-
-        return stackView
+        headerView.addSubview(button)
+        
+        return headerView
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
