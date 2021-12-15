@@ -20,6 +20,10 @@ class DetailsTableViewController: UITableViewController {
         prepareFlightData()
     }
 
+    override func viewLayoutMarginsDidChange() {
+        tableView.reloadData()
+    }
+
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -36,18 +40,17 @@ class DetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UITableViewHeaderFooterView()
-//        headerView.textLabel?.text = flightData[section].title
         
-        let label = UILabel(frame: CGRect(x: 40,
+        let label = UILabel(frame: CGRect(x: tableView.safeAreaInsets.left + 40,
                                           y: 0,
-                                          width: 300,
+                                          width: tableView.frame.width - 60,
                                           height: 40))
         label.text = flightData[section].title
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 17.0)
         headerView.addSubview(label)
 
-        let button = UIButton(frame: CGRect(x: 0,
+        let button = UIButton(frame: CGRect(x: tableView.safeAreaInsets.left,
                                             y: 0,
                                             width: 40,
                                             height: 40))
