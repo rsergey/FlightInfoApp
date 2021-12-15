@@ -82,17 +82,17 @@ class DetailsTableViewController: UITableViewController {
     
     private func prepareFlightData() {
         flightData = [FlightMenu(title: "Flight Status",
-                                 items: [flight.flightStatus ?? "-"],
+                                 items: [flight.flightStatus?.capitalized ?? "-"],
                                  isHidden: false),
                      FlightMenu(title: "Departure",
                                 items: [flight.departure?.airport ?? "-",
                                         flight.departure?.iata ?? "-",
-                                        flight.departure?.scheduled ?? "-"],
+                                        prepareDateForText(date: flight.departure?.scheduled)],
                                 isHidden: false),
                      FlightMenu(title: "Arrival",
                                 items: [flight.arrival?.airport ?? "-",
                                         flight.arrival?.iata ?? "-",
-                                        flight.arrival?.scheduled ?? "-"],
+                                        prepareDateForText(date: flight.arrival?.scheduled)],
                                 isHidden: false),
                      FlightMenu(title: "Airline",
                                 items: [flight.airline?.name ?? "-"],
@@ -106,5 +106,17 @@ class DetailsTableViewController: UITableViewController {
         flightData[button.tag].isHidden.toggle()
         tableView.reloadData()
     }
-
+    
+    private func prepareDateForText(date: String?) -> String {
+        if let dateString = date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+            let dateDate = dateFormatter.date(from: dateString) ?? Date()
+            dateFormatter.dateFormat = "dd-MM-yyy HH:mm:ss"
+            return dateFormatter.string(from: dateDate)
+        } else {
+            return "-"
+        }
+    }
+    
 }
