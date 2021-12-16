@@ -10,6 +10,7 @@ import UIKit
 class SelectionViewController: UIViewController, UITextFieldDelegate {
     // MARK: - IBOutlets
     @IBOutlet weak var iataTextField: UITextField!
+    @IBOutlet weak var iataGoButton: UIButton!
     
     // MARK: - Private Properties
     private var airportIata = ""
@@ -18,6 +19,7 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         iataTextField.delegate = self
+        iataGoButton.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +46,11 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: - IBActions
+    @IBAction func iataGoButtonPressed(_ sender: UIButton) {
+        let _ = textFieldShouldReturn(iataTextField)
+    }
+    
     // MARK: - Pablic Methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (iataTextField.text?.count ?? 0) > 2 {
@@ -54,6 +61,14 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
             showAlert()
         }
         return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text?.count == 3 {
+            iataGoButton.isEnabled = true
+        } else {
+            iataGoButton.isEnabled = false
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -69,6 +84,7 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
         guard let defaultAirportIata = DataManager.defaultAirportIata else { return }
         iataTextField.text = defaultAirportIata
         airportIata = defaultAirportIata
+        iataGoButton.isEnabled = true
     }
     
     private func showAlert() {
