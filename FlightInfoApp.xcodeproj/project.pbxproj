@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A508D7992764F49500561907 /* FlightMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A508D7982764F49500561907 /* FlightMenu.swift */; };
+		A5133AEB276DE20200A60FE5 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5133AEA276DE20200A60FE5 /* KeychainManager.swift */; };
 		A534565426C3048D00B3048D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A534565326C3048D00B3048D /* NetworkManager.swift */; };
 		A54C6AE82729D32000E6CD24 /* FlightInfoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A54C6AE62729D32000E6CD24 /* FlightInfoApp.xcdatamodeld */; };
 		A550E2132760DA5400AEE458 /* DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A550E2122760DA5400AEE458 /* DetailsTableViewController.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		A508D7982764F49500561907 /* FlightMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightMenu.swift; sourceTree = "<group>"; };
+		A5133AEA276DE20200A60FE5 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		A534565326C3048D00B3048D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A54C6AE72729D32000E6CD24 /* FlightInfoApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlightInfoApp.xcdatamodel; sourceTree = "<group>"; };
 		A550E2122760DA5400AEE458 /* DetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				A534565326C3048D00B3048D /* NetworkManager.swift */,
 				A5E9583426D686EA009AA293 /* StorageManager.swift */,
 				A5E9583726D68709009AA293 /* DataManager.swift */,
+				A5133AEA276DE20200A60FE5 /* KeychainManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				A5E9583826D68709009AA293 /* DataManager.swift in Sources */,
 				A5BD84EE26BE9DE600CC6FE8 /* AppDelegate.swift in Sources */,
 				A5E9583526D686EA009AA293 /* StorageManager.swift in Sources */,
+				A5133AEB276DE20200A60FE5 /* KeychainManager.swift in Sources */,
 				A5BD850E26BF247500CC6FE8 /* ArrivalTableViewController.swift in Sources */,
 				A5F3ED1626D661FD005E52EC /* AirportListTableViewController.swift in Sources */,
 				A534565426C3048D00B3048D /* NetworkManager.swift in Sources */,
