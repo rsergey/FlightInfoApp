@@ -15,7 +15,7 @@ class KeychainManager {
     private init() {}
     
     // MARK: - Public Methods
-    func saveItem() {
+    func saveItem(apiKey: String) {
         
     }
     
@@ -23,7 +23,7 @@ class KeychainManager {
         
     }
     
-    func updateItem() {
+    func updateItem(apiKey: String) {
         
     }
     
