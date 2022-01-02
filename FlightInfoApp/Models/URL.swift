@@ -24,3 +24,8 @@ enum FlightType: String {
     case arrival
     case departure
 }
+
+enum kSecAttributes: String {
+    case service = "flightInfoAppService"
+    case account = "userAccount"
+}
