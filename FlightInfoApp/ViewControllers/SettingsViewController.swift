@@ -43,7 +43,18 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Private Methods
     private func prepareApiKey() {
-        
+        guard let key = KeychainManager.shared.read(service: kSecAttributes.service.rawValue,
+                                                    account: kSecAttributes.account.rawValue) else {
+            apiKeyTextField.placeholder = "No API key. Enter your API key here."
+            return
+        }
+        apiKeyTextField.text = key
+    }
+    
+    private func saveApiKey(key: String) {
+        KeychainManager.shared.save(data: key,
+                                    service: kSecAttributes.service.rawValue,
+                                    account: kSecAttributes.account.rawValue)
     }
     
     private func prepareStorageTimeInterval() {
@@ -66,6 +77,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Internal Methods
     internal func textFieldDidEndEditing(_ textField: UITextField) {
         guard let apiKey = textField.text else { return }
-        print("Save to keychain " + apiKey)
+        saveApiKey(key: apiKey)
     }
 }
