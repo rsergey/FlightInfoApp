@@ -82,6 +82,11 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Internal Methods
+    internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+    
     internal func textFieldDidEndEditing(_ textField: UITextField) {
         guard let apiKey = textField.text else { return }
         updateApiKey(key: apiKey)
