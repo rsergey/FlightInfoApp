@@ -23,7 +23,7 @@
 		A5BD851126BF249C00CC6FE8 /* DepartureTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD851026BF249C00CC6FE8 /* DepartureTableViewController.swift */; };
 		A5BD851826BF2DC500CC6FE8 /* Flights.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BD851726BF2DC500CC6FE8 /* Flights.swift */; };
 		A5E9582D26D66A37009AA293 /* Airports.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E9582C26D66A37009AA293 /* Airports.swift */; };
-		A5E9583126D67B8F009AA293 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E9583026D67B8F009AA293 /* URL.swift */; };
+		A5E9583126D67B8F009AA293 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E9583026D67B8F009AA293 /* Attributes.swift */; };
 		A5E9583526D686EA009AA293 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E9583426D686EA009AA293 /* StorageManager.swift */; };
 		A5E9583826D68709009AA293 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E9583726D68709009AA293 /* DataManager.swift */; };
 		A5F3ED1626D661FD005E52EC /* AirportListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3ED1526D661FD005E52EC /* AirportListTableViewController.swift */; };
@@ -48,7 +48,7 @@
 		A5BD851026BF249C00CC6FE8 /* DepartureTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartureTableViewController.swift; sourceTree = "<group>"; };
 		A5BD851726BF2DC500CC6FE8 /* Flights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flights.swift; sourceTree = "<group>"; };
 		A5E9582C26D66A37009AA293 /* Airports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airports.swift; sourceTree = "<group>"; };
-		A5E9583026D67B8F009AA293 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		A5E9583026D67B8F009AA293 /* Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		A5E9583426D686EA009AA293 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		A5E9583726D68709009AA293 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		A5F3ED1526D661FD005E52EC /* AirportListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportListTableViewController.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 			children = (
 				A5BD851726BF2DC500CC6FE8 /* Flights.swift */,
 				A5E9582C26D66A37009AA293 /* Airports.swift */,
-				A5E9583026D67B8F009AA293 /* URL.swift */,
+				A5E9583026D67B8F009AA293 /* Attributes.swift */,
 				A508D7982764F49500561907 /* FlightMenu.swift */,
 			);
 			path = Models;
@@ -245,7 +245,7 @@
 				A5BD850E26BF247500CC6FE8 /* ArrivalTableViewController.swift in Sources */,
 				A5F3ED1626D661FD005E52EC /* AirportListTableViewController.swift in Sources */,
 				A534565426C3048D00B3048D /* NetworkManager.swift in Sources */,
-				A5E9583126D67B8F009AA293 /* URL.swift in Sources */,
+				A5E9583126D67B8F009AA293 /* Attributes.swift in Sources */,
 				A5E9582D26D66A37009AA293 /* Airports.swift in Sources */,
 				A5BD84F026BE9DE600CC6FE8 /* SceneDelegate.swift in Sources */,
 				A576170A27247940003969AD /* SettingsViewController.swift in Sources */,

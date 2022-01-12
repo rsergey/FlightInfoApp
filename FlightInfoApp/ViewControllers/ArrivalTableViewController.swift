@@ -171,8 +171,15 @@ class ArrivalTableViewController: UITableViewController {
     
     // Network
     @objc private func fecthArrivalFlightsFromNetwork() {
+        guard let key = KeychainManager.shared.readData(service: kSecAttributes.service.rawValue,
+                                                        account: kSecAttributes.account.rawValue) else {
+            self.stopUpdateAnimation()
+            keychainFailedAlert()
+            return
+        }
+        
         NetworkManager.shared.fetchFlights(from: .flightsUrl,
-                                           key: .accessKey,
+                                           key: key,
                                            type: .arrival,
                                            iata: airportIata) { result in
             switch result {
@@ -194,6 +201,16 @@ class ArrivalTableViewController: UITableViewController {
     }
     
     // Alerts
+    private func keychainFailedAlert() {
+        let alert = UIAlertController(title: "No API key found!",
+                                      message: "Please save your API key in the app settings.",
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK",
+                                     style: .default)
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
+    }
+    
     private func networkFailedAlert() {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Network request failed!",

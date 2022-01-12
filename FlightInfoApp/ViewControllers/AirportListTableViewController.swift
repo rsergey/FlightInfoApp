@@ -156,8 +156,15 @@ class AirportListTableViewController: UITableViewController {
     }
     
     private func fetchAirportsFromNetwork() {
+        guard let key = KeychainManager.shared.readData(service: kSecAttributes.service.rawValue,
+                                                        account: kSecAttributes.account.rawValue) else {
+            self.stopUpdateAnimation()
+            keychainFailedAlert()
+            return
+        }
+        
         NetworkManager.shared.fetchAirports(from: .airportsUrl,
-                                            key: .accessKey) { (result) in
+                                            key: key) { (result) in
             switch result {
             case .success(let airports):
                 self.airports = airports
@@ -173,6 +180,16 @@ class AirportListTableViewController: UITableViewController {
     }
     
     // Alerts
+    private func keychainFailedAlert() {
+        let alert = UIAlertController(title: "No API key found!",
+                                      message: "Please save your API key in the app settings.",
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK",
+                                     style: .default)
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
+    }
+    
     private func warningNewRequestAlert() {
         let alert = UIAlertController(title: "Updating airports list from network.",
                                       message: "The full list of airports rarely changes. Are you sure you want to update the data?",
