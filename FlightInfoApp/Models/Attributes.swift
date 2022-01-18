@@ -24,6 +24,3 @@ enum kSecAttributes: String {
     case service = "flightInfoAppService"
     case account = "userAccount"
 }
-
-// API key#1 = bf9f1644f60ea683c4a27c95035f65ab
-// API key#2 = 86a9e685862108f5593b73388f3246a5
