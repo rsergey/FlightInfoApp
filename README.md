@@ -8,7 +8,7 @@
 ## ViewControllers
 
 ### SelectionViewController
-<img src="/Screenshots/SelectionViewController.png" width="264" height="485">  
+<img src="/Screenshots/SelectionViewController.png" width="50%" height="50%">  
 Стартовый экран приложения.
 
 SelectionViewController содержит текстовое поле для ввода IATA кода аэропорта по которому осуществляется запрос данных о перелётах. Реализована фильтрация вводимых данных по допустимым символам и их количеству. Введённый код сохраняется в UserDefaults как IATA код по умолчанию для последующих сеансов использования приложения.
@@ -19,25 +19,25 @@ SelectionViewController содержит текстовое поле для вв
 * AirportListTableViewController по кнопке "Find your airport"
 
 ### SettingsViewController
-<img src="/Screenshots/SettingsViewController.png" width="264" height="485">  
+<img src="/Screenshots/SettingsViewController.png" width="50%" height="50%">  
 Экран настроек приложения.
 
 SettingsViewController содержит текстовое поле для ввода пользовательского API ключа. Введённый ключ сохраняется в Keychain. Слайдером задаётся период хранения данных о перелётах (в диапазоне от 1 до 12 часов). Установленное значение сохраняется в UserDefaults. По кнопке "aviationstack.com" осуществляется переход на сайт сервиса.
 
 ### ArrivalTableViewController (DepartureTableViewController)
-<img src="/Screenshots/ArrivalTableViewController.png" width="264" height="485">  
+<img src="/Screenshots/ArrivalTableViewController.png" width="50%" height="50%">  
 Связанные через TabBar эраны со списками прибывыющих/вылетающих рейсов выбранного аэропорта.
 
 ArrivalTableViewController (DepartureTableViewController) осуществляет загрузку списка рейсов выбранного аэропорта из базы данных или из сети (если превышено время хранения данных или если он не был загружен ранее). Реализованы функции pull-to-refresh и поиск по списку. Отсутствие сохранённого API ключа или ошибка сетевого запроса вызывает соответствующее уведомление для пользователя. При выборе перелёта из списка осуществляется переход на DetailsTableViewController с передачей данных о выбранном перелёте.
 
 ### AirportListTableViewController
-<img src="/Screenshots/AirportListTableViewController.png" width="264" height="485">  
+<img src="/Screenshots/AirportListTableViewController.png" width="50%" height="50%">  
 Экран со списком всех доступных в сервисе Aviationstack аэропортов (в алфавитном порядке IATA кодов) с указанием их места расположения.
 
 AirportListTableViewController осуществляет загрузку списка аэропортов из базы данных или из сети (если он не был загружен ранее). Реализованы функции pull-to-refresh и поиск по списку. Отсутствие сохранённого API ключа или ошибка сетевого запроса вызывает соответствующее уведомление для пользователя. Попытка принудительного обновления списка из сети сопровождается предупреждением о нецелесообразности частого обновления из-за редко меняющихся данных, с возможностью продолжить или отменить действие. При выборе аэропорта из списка осуществляется переход на ArrivalTableViewController (DepartureTableViewController) с передачей IATA кода выбранного аэропорта и сохранением его как аэропорт по умолчанию.
 
 ### DetailsTableViewController
-<img src="/Screenshots/DetailsTableViewController.png" width="264" height="485">  
+<img src="/Screenshots/DetailsTableViewController.png" width="50%" height="50%">  
 Экран детальной информации о выбранном перелёте.
 
 В табличном виде представлена детальная информация о выбранном перелёте. Реализована возможность сворачивать и разворачивать секции таблицы.
