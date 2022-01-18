@@ -8,6 +8,7 @@
 ## ViewControllers
 
 ### SelectionViewController
+![](/Screenshots/SelectionViewController.png "SelectionViewController")
 Стартовый экран приложения.
 
 SelectionViewController содержит текстовое поле для ввода IATA кода аэропорта по которому осуществляется запрос данных о перелётах. Реализована фильтрация вводимых данных по допустимым символам и их количеству. Введённый код сохраняется в UserDefaults как IATA код по умолчанию для последующих сеансов использования приложения.
