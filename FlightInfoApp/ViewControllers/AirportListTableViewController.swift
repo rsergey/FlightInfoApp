@@ -47,8 +47,7 @@ class AirportListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "selectionAirportCell", for: indexPath)
-        var airport: Airports
-        airport = isFiltering ? filteredAirports[indexPath.row] : airports[indexPath.row]
+        let airport: Airports = isFiltering ? filteredAirports[indexPath.row] : airports[indexPath.row]
         var content = cell.defaultContentConfiguration()
         content.text = prepareDataForText(airport: airport)
         content.secondaryText = prepareDataForSecondaryText(airport: airport)

@@ -52,8 +52,7 @@ class ArrivalTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "arrivalFlightCell", for: indexPath)
-        var arrivalFlight: Flights
-        arrivalFlight =  isFiltering ? filteredFlights[indexPath.row] : arrivalFlights[indexPath.row]
+        let arrivalFlight: Flights = isFiltering ? filteredFlights[indexPath.row] : arrivalFlights[indexPath.row]
         var content = cell.defaultContentConfiguration()
         content.text = prepareDataForText(arrivalFlight: arrivalFlight)
         content.secondaryText = prepareDataForSecondaryText(arrivalFlight: arrivalFlight)
