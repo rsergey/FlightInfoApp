@@ -53,11 +53,7 @@ class DepartureTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "departureFlightCell", for: indexPath)
         var departureFlight: Flights
-        if isFiltering {
-            departureFlight = filteredFlights[indexPath.row]
-        } else {
-            departureFlight = departureFlights[indexPath.row]
-        }
+        departureFlight = isFiltering ? filteredFlights[indexPath.row] : departureFlights[indexPath.row]
         var content = cell.defaultContentConfiguration()
         content.text = prepareDataForText(departureFlight: departureFlight)
         content.secondaryText = prepareDataForSecondaryText(departureFlight: departureFlight)
