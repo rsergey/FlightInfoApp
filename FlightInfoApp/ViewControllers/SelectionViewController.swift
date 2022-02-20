@@ -64,11 +64,7 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.text?.count == 3 {
-            iataGoButton.isEnabled = true
-        } else {
-            iataGoButton.isEnabled = false
-        }
+        iataGoButton.isEnabled = textField.text?.count == 3 ? true : false
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
