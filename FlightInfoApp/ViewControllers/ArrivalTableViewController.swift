@@ -49,7 +49,7 @@ class ArrivalTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "arrivalFlightCell", for: indexPath)
-        let arrivalFlight: Flights = isFiltering ? filteredFlights[indexPath.row] : arrivalFlights[indexPath.row]
+        let arrivalFlight = isFiltering ? filteredFlights[indexPath.row] : arrivalFlights[indexPath.row]
         var content = cell.defaultContentConfiguration()
         content.text = prepareDataForText(arrivalFlight: arrivalFlight)
         content.secondaryText = prepareDataForSecondaryText(arrivalFlight: arrivalFlight)
@@ -60,13 +60,7 @@ class ArrivalTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let indexPath = tableView.indexPathForSelectedRow {
-            let flight: Flights
-            
-            if isFiltering {
-                flight = filteredFlights[indexPath.row]
-            } else {
-                flight = arrivalFlights[indexPath.row]
-            }
+            let flight = isFiltering ? filteredFlights[indexPath.row] : arrivalFlights[indexPath.row]
             
             guard let detailsVC = segue.destination as? DetailsTableViewController else { return }
             detailsVC.flight = flight

@@ -44,7 +44,7 @@ class AirportListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "selectionAirportCell", for: indexPath)
-        let airport: Airports = isFiltering ? filteredAirports[indexPath.row] : airports[indexPath.row]
+        let airport = isFiltering ? filteredAirports[indexPath.row] : airports[indexPath.row]
         var content = cell.defaultContentConfiguration()
         content.text = prepareDataForText(airport: airport)
         content.secondaryText = prepareDataForSecondaryText(airport: airport)
@@ -56,12 +56,7 @@ class AirportListTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFlightsSegue" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let airport: Airports
-                if isFiltering {
-                    airport = filteredAirports[indexPath.row]
-                } else {
-                    airport = airports[indexPath.row]
-                }
+                let airport = isFiltering ? filteredAirports[indexPath.row] : airports[indexPath.row]
                 
                 DataManager.defaultAirportIata = airport.iataCode
                 

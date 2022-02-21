@@ -49,7 +49,7 @@ class DepartureTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "departureFlightCell", for: indexPath)
-        let departureFlight: Flights = isFiltering ? filteredFlights[indexPath.row] : departureFlights[indexPath.row]
+        let departureFlight = isFiltering ? filteredFlights[indexPath.row] : departureFlights[indexPath.row]
         var content = cell.defaultContentConfiguration()
         content.text = prepareDataForText(departureFlight: departureFlight)
         content.secondaryText = prepareDataForSecondaryText(departureFlight: departureFlight)
@@ -60,13 +60,7 @@ class DepartureTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let indexPath = tableView.indexPathForSelectedRow {
-            let flight: Flights
-            
-            if isFiltering {
-                flight = filteredFlights[indexPath.row]
-            } else {
-                flight = departureFlights[indexPath.row]
-            }
+            let flight = isFiltering ? filteredFlights[indexPath.row] : departureFlights[indexPath.row]
             
             guard let detailsVC = segue.destination as? DetailsTableViewController else { return }
             detailsVC.flight = flight
