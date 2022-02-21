@@ -29,7 +29,7 @@ class DepartureTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
@@ -41,12 +41,12 @@ class DepartureTableViewController: UITableViewController {
         tabBarController?.navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         isFiltering ? filteredFlights.count : departureFlights.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "departureFlightCell", for: indexPath)
         let departureFlight = isFiltering ? filteredFlights[indexPath.row] : departureFlights[indexPath.row]
@@ -138,14 +138,14 @@ class DepartureTableViewController: UITableViewController {
                 self.departureFlights = []
                 for flight in flights {
                     self.departureFlights.append(Flights(flightStatus: flight.flightStatus,
-                                                       departure: DepartureAirport(airport: flight.departure?.airport,
-                                                                                   iata: flight.departure?.iata,
-                                                                                   scheduled: flight.departure?.scheduled),
-                                                       arrival: ArrivalAirport(airport: flight.arrival?.airport,
-                                                                               iata: flight.arrival?.iata,
-                                                                               scheduled: flight.arrival?.scheduled),
-                                                       airline: Airline(name: flight.airline?.name),
-                                                       flight: Flight(iata: flight.flight?.iata)))
+                                                         departure: DepartureAirport(airport: flight.departure?.airport,
+                                                                                     iata: flight.departure?.iata,
+                                                                                     scheduled: flight.departure?.scheduled),
+                                                         arrival: ArrivalAirport(airport: flight.arrival?.airport,
+                                                                                 iata: flight.arrival?.iata,
+                                                                                 scheduled: flight.arrival?.scheduled),
+                                                         airline: Airline(name: flight.airline?.name),
+                                                         flight: Flight(iata: flight.flight?.iata)))
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -154,7 +154,6 @@ class DepartureTableViewController: UITableViewController {
         self.stopUpdateAnimation()
         tableView.reloadData()
     }
-    
     
     // Network
     @objc private func fecthDepartureFlightsFromNetwork() {

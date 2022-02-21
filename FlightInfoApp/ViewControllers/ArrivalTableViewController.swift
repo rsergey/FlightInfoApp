@@ -29,7 +29,7 @@ class ArrivalTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
@@ -41,12 +41,12 @@ class ArrivalTableViewController: UITableViewController {
         tabBarController?.navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         isFiltering ? filteredFlights.count : arrivalFlights.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "arrivalFlightCell", for: indexPath)
         let arrivalFlight = isFiltering ? filteredFlights[indexPath.row] : arrivalFlights[indexPath.row]
