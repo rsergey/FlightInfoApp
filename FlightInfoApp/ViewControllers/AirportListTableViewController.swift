@@ -39,10 +39,7 @@ class AirportListTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering {
-            return filteredAirports.count
-        }
-        return airports.count
+        isFiltering ? filteredAirports.count : airports.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

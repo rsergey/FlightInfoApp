@@ -44,10 +44,7 @@ class ArrivalTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering {
-            return filteredFlights.count
-        }
-        return arrivalFlights.count
+        isFiltering ? filteredFlights.count : arrivalFlights.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
