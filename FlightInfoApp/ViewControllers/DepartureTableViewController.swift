@@ -18,12 +18,12 @@ class DepartureTableViewController: UITableViewController {
     private let departureSearchController = UISearchController(searchResultsController: nil)
     private var departureFlights: [Flights] = []
     private var filteredFlights: [Flights] = []
-    private var searchBarIsEmpty: Bool {
+    private var departureSearchBarIsEmpty: Bool {
         guard let text = departureSearchController.searchBar.text else { return false }
         return text.isEmpty
     }
     private var isFiltering: Bool {
-        return departureSearchController.isActive && !searchBarIsEmpty
+        departureSearchController.isActive && !departureSearchBarIsEmpty
     }
     
     // MARK: - Override Methods
@@ -37,7 +37,7 @@ class DepartureTableViewController: UITableViewController {
         
         departureSearchController.searchResultsUpdater = self
         departureSearchController.obscuresBackgroundDuringPresentation = false
-        departureSearchController.searchBar.placeholder = "Search flight"
+        departureSearchController.searchBar.placeholder = "Search departure flight"
         tabBarController?.navigationItem.searchController = departureSearchController
         definesPresentationContext = true
     }
