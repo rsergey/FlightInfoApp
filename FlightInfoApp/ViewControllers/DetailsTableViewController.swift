@@ -67,11 +67,7 @@ class DetailsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if flightData[section].isHidden {
-            return 0
-        } else {
-            return flightData[section].items.count
-        }
+        flightData[section].isHidden ? 0 : flightData[section].items.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
