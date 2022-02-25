@@ -38,7 +38,7 @@ class ArrivalTableViewController: UITableViewController {
         arrivalSearchController.searchResultsUpdater = self
         arrivalSearchController.obscuresBackgroundDuringPresentation = false
         arrivalSearchController.searchBar.placeholder = "Search arrival flight"
-        tabBarController?.navigationItem.searchController = arrivalSearchController
+        tableView.tableHeaderView = arrivalSearchController.searchBar
         definesPresentationContext = true
     }
     
