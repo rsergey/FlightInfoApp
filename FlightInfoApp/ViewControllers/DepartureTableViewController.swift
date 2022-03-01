@@ -38,7 +38,7 @@ class DepartureTableViewController: UITableViewController {
         departureSearchController.searchResultsUpdater = self
         departureSearchController.obscuresBackgroundDuringPresentation = false
         departureSearchController.searchBar.placeholder = "Search departure flight"
-        tableView.tableHeaderView = departureSearchController.searchBar
+        tabBarController?.navigationItem.searchController = departureSearchController
         definesPresentationContext = true
     }
     
