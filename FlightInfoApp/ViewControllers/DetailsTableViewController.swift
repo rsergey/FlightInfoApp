@@ -41,7 +41,7 @@ class DetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UITableViewHeaderFooterView()
         
-        let label = UILabel(frame: CGRect(x: tableView.safeAreaInsets.left + 40,
+        let label = UILabel(frame: CGRect(x: tableView.safeAreaInsets.left + 50,
                                           y: 0,
                                           width: tableView.frame.width - 60,
                                           height: 40))
@@ -50,7 +50,7 @@ class DetailsTableViewController: UITableViewController {
         label.font = UIFont.boldSystemFont(ofSize: 17.0)
         headerView.addSubview(label)
 
-        let button = UIButton(frame: CGRect(x: tableView.safeAreaInsets.left,
+        let button = UIButton(frame: CGRect(x: tableView.safeAreaInsets.left + 10,
                                             y: 0,
                                             width: 40,
                                             height: 40))
