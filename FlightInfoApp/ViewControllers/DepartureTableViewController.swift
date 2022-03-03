@@ -29,6 +29,7 @@ class DepartureTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.delegate = self
         
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
@@ -221,5 +222,16 @@ extension DepartureTableViewController: UISearchResultsUpdating {
             return (flight.arrival?.airport?.lowercased().contains(searchText.lowercased()) ?? false)
         })
         tableView.reloadData()
+    }
+}
+
+extension DepartureTableViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if let selectedViewController = viewController as? DepartureTableViewController {
+            if selectedViewController.departureSearchController.isActive == true {
+                selectedViewController.departureSearchController.isActive = false
+                tableView.reloadData()
+            }
+        }
     }
 }
