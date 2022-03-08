@@ -29,7 +29,7 @@ class ArrivalTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController?.delegate = self
+//        tabBarController?.delegate = self
         
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
@@ -225,13 +225,13 @@ extension ArrivalTableViewController: UISearchResultsUpdating {
     }
 }
 
-extension ArrivalTableViewController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let selectedViewController = viewController as? ArrivalTableViewController {
-            if selectedViewController.arrivalSearchController.isActive == true {
-                selectedViewController.arrivalSearchController.isActive = false
-                tableView.reloadData()
-            }
-        }
-    }
-}
+//extension ArrivalTableViewController: UITabBarControllerDelegate {
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//        if let selectedViewController = viewController as? ArrivalTableViewController {
+//            if selectedViewController.arrivalSearchController.isActive == true {
+//                selectedViewController.arrivalSearchController.isActive = false
+//                tableView.reloadData()
+//            }
+//        }
+//    }
+//}
