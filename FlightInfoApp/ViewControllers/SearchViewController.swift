@@ -28,9 +28,11 @@ extension SearchViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController is ArrivalTableViewController {
             isArrivalTabSelected = true
+            print("Arrival")
         }
         if viewController is DepartureTableViewController {
             isArrivalTabSelected = false
+            print("Departure")
         }
     }
 }

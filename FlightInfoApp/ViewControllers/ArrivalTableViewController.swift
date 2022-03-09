@@ -15,15 +15,15 @@ class ArrivalTableViewController: UITableViewController {
     var airportIata = ""
     
     // MARK: - Private Properties
-    private let arrivalSearchController = UISearchController(searchResultsController: nil)
+//    private let arrivalSearchController = UISearchController(searchResultsController: nil)
     private var arrivalFlights: [Flights] = []
     private var filteredFlights: [Flights] = []
-    private var arrivalSearchBarIsEmpty: Bool {
-        guard let text = arrivalSearchController.searchBar.text else { return false }
+    private var searchBarIsEmpty: Bool {
+        guard let text = tabBarController?.navigationItem.searchController?.searchBar.text else { return false }
         return text.isEmpty
     }
     private var isFiltering: Bool {
-        arrivalSearchController.isActive && !arrivalSearchBarIsEmpty
+        tabBarController?.navigationItem.searchController?.isActive ?? false && !searchBarIsEmpty
     }
     
     // MARK: - Override Methods
@@ -36,10 +36,10 @@ class ArrivalTableViewController: UITableViewController {
         setupRefreshControl()
         getArrivalFlights()
         
-        arrivalSearchController.searchResultsUpdater = self
-        arrivalSearchController.obscuresBackgroundDuringPresentation = false
-        arrivalSearchController.searchBar.placeholder = "Search arrival flight"
-        tabBarController?.navigationItem.searchController = arrivalSearchController
+        tabBarController?.navigationItem.searchController?.searchResultsUpdater = self
+        tabBarController?.navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
+//        tabBarController?.navigationItem.searchController?.searchBar.placeholder = "Search arrival flight"
+//        tabBarController?.navigationItem.searchController = arrivalSearchController
         definesPresentationContext = true
     }
     

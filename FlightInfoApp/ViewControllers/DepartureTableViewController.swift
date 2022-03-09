@@ -15,15 +15,15 @@ class DepartureTableViewController: UITableViewController {
     var airportIata = ""
     
     // MARK: - Private Properties
-    private let departureSearchController = UISearchController(searchResultsController: nil)
+//    private let departureSearchController = UISearchController(searchResultsController: nil)
     private var departureFlights: [Flights] = []
     private var filteredFlights: [Flights] = []
-    private var departureSearchBarIsEmpty: Bool {
-        guard let text = departureSearchController.searchBar.text else { return false }
+    private var searchBarIsEmpty: Bool {
+        guard let text = tabBarController?.navigationItem.searchController?.searchBar.text else { return false }
         return text.isEmpty
     }
     private var isFiltering: Bool {
-        departureSearchController.isActive && !departureSearchBarIsEmpty
+        tabBarController?.navigationItem.searchController?.isActive ?? false && !searchBarIsEmpty
     }
     
     // MARK: - Override Methods
@@ -36,10 +36,10 @@ class DepartureTableViewController: UITableViewController {
         setupRefreshControl()
         getDepartureFlights()
         
-        departureSearchController.searchResultsUpdater = self
-        departureSearchController.obscuresBackgroundDuringPresentation = false
-        departureSearchController.searchBar.placeholder = "Search departure flight"
-        tabBarController?.navigationItem.searchController = departureSearchController
+        tabBarController?.navigationItem.searchController?.searchResultsUpdater = self
+        tabBarController?.navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
+//        tabBarController?.navigationItem.searchController?.searchBar.placeholder = "Search departure flight"
+//        tabBarController?.navigationItem.searchController = departureSearchController
         definesPresentationContext = true
     }
     

@@ -36,6 +36,7 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
         guard let tabBarController = segue.destination as? UITabBarController else { return }
         tabBarController.navigationItem.title = "Airport • " + airportIata
         tabBarController.navigationItem.searchController = SearchViewController()
+        tabBarController.navigationItem.searchController?.searchBar.placeholder = "Search flight"
         guard let viewControllers = tabBarController.viewControllers else { return }
         for viewController in viewControllers {
             if let arrivalVC = viewController as? ArrivalTableViewController {
