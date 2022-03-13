@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UISearchController {
+class SearchController: UISearchController {
     // MARK: - Public Properties
     override var searchResultsController: UIViewController? {
         isArrivalTabSelected ? ArrivalTableViewController() : DepartureTableViewController()
@@ -21,11 +21,12 @@ class SearchViewController: UISearchController {
         super.viewDidLoad()
         tabBarController?.delegate = self
     }
-
+    
 }
 
-extension SearchViewController: UITabBarControllerDelegate {
+extension SearchController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        print("UITabBarControllerDelegate")
         if viewController is ArrivalTableViewController {
             isArrivalTabSelected = true
             print("Arrival")
