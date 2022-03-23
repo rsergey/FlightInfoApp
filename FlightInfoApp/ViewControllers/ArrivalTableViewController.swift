@@ -15,32 +15,34 @@ class ArrivalTableViewController: UITableViewController {
     var airportIata = ""
     
     // MARK: - Private Properties
-//    private let arrivalSearchController = UISearchController(searchResultsController: nil)
+    private let arrivalSearchController = UISearchController(searchResultsController: nil)
     private var arrivalFlights: [Flights] = []
     private var filteredFlights: [Flights] = []
-    private var searchBarIsEmpty: Bool {
-        guard let text = tabBarController?.navigationItem.searchController?.searchBar.text else { return false }
+    private var arrivalSearchBarIsEmpty: Bool {
+        guard let text = arrivalSearchController.searchBar.text else { return false }
         return text.isEmpty
     }
     private var isFiltering: Bool {
-        tabBarController?.navigationItem.searchController?.isActive ?? false && !searchBarIsEmpty
+        arrivalSearchController.isActive && !arrivalSearchBarIsEmpty
     }
     
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tabBarController?.delegate = self
-        
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
         getArrivalFlights()
         
-        tabBarController?.navigationItem.searchController?.searchResultsUpdater = self
-        tabBarController?.navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
-//        tabBarController?.navigationItem.searchController?.searchBar.placeholder = "Search arrival flight"
-//        tabBarController?.navigationItem.searchController = arrivalSearchController
-        definesPresentationContext = true
+        arrivalSearchController.searchResultsUpdater = self
+        arrivalSearchController.obscuresBackgroundDuringPresentation = false
+        arrivalSearchController.searchBar.placeholder = "Search arrival flight"
+        tabBarController?.definesPresentationContext = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.navigationItem.searchController = arrivalSearchController
     }
     
     // MARK: - Table view data source
@@ -224,14 +226,3 @@ extension ArrivalTableViewController: UISearchResultsUpdating {
         tableView.reloadData()
     }
 }
-
-//extension ArrivalTableViewController: UITabBarControllerDelegate {
-//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//        if let selectedViewController = viewController as? ArrivalTableViewController {
-//            if selectedViewController.arrivalSearchController.isActive == true {
-//                selectedViewController.arrivalSearchController.isActive = false
-//                tableView.reloadData()
-//            }
-//        }
-//    }
-//}

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74CE41C127D67F0400D77850 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE41C027D67F0400D77850 /* SearchController.swift */; };
 		A508D7992764F49500561907 /* FlightMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A508D7982764F49500561907 /* FlightMenu.swift */; };
 		A5133AEB276DE20200A60FE5 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5133AEA276DE20200A60FE5 /* KeychainManager.swift */; };
 		A534565426C3048D00B3048D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A534565326C3048D00B3048D /* NetworkManager.swift */; };
@@ -31,7 +30,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		74CE41C027D67F0400D77850 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		A508D7982764F49500561907 /* FlightMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightMenu.swift; sourceTree = "<group>"; };
 		A5133AEA276DE20200A60FE5 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		A534565326C3048D00B3048D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				A5BD851026BF249C00CC6FE8 /* DepartureTableViewController.swift */,
 				A576170927247940003969AD /* SettingsViewController.swift */,
 				A550E2122760DA5400AEE458 /* DetailsTableViewController.swift */,
-				74CE41C027D67F0400D77850 /* SearchController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -250,7 +247,6 @@
 				A534565426C3048D00B3048D /* NetworkManager.swift in Sources */,
 				A5E9583126D67B8F009AA293 /* Attributes.swift in Sources */,
 				A5E9582D26D66A37009AA293 /* Airports.swift in Sources */,
-				74CE41C127D67F0400D77850 /* SearchController.swift in Sources */,
 				A5BD84F026BE9DE600CC6FE8 /* SceneDelegate.swift in Sources */,
 				A576170A27247940003969AD /* SettingsViewController.swift in Sources */,
 				A5BD851826BF2DC500CC6FE8 /* Flights.swift in Sources */,
