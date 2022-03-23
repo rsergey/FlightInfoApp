@@ -35,6 +35,7 @@ class SelectionViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let tabBarController = segue.destination as? UITabBarController else { return }
         tabBarController.navigationItem.title = "Airport • " + airportIata
+        tabBarController.navigationItem.searchController?.searchBar.placeholder = "Search flight"
         guard let viewControllers = tabBarController.viewControllers else { return }
         for viewController in viewControllers {
             if let arrivalVC = viewController as? ArrivalTableViewController {
