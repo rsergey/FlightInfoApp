@@ -29,8 +29,6 @@ class ArrivalTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController?.delegate = self
-        
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
@@ -39,8 +37,12 @@ class ArrivalTableViewController: UITableViewController {
         arrivalSearchController.searchResultsUpdater = self
         arrivalSearchController.obscuresBackgroundDuringPresentation = false
         arrivalSearchController.searchBar.placeholder = "Search arrival flight"
+        tabBarController?.definesPresentationContext = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         tabBarController?.navigationItem.searchController = arrivalSearchController
-        definesPresentationContext = true
     }
     
     // MARK: - Table view data source
@@ -222,16 +224,5 @@ extension ArrivalTableViewController: UISearchResultsUpdating {
             return (flight.departure?.airport?.lowercased().contains(searchText.lowercased()) ?? false)
         })
         tableView.reloadData()
-    }
-}
-
-extension ArrivalTableViewController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let selectedViewController = viewController as? ArrivalTableViewController {
-            if selectedViewController.arrivalSearchController.isActive == true {
-                selectedViewController.arrivalSearchController.isActive = false
-                tableView.reloadData()
-            }
-        }
     }
 }

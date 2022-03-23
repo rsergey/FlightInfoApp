@@ -29,8 +29,6 @@ class DepartureTableViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController?.delegate = self
-        
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         setupRefreshControl()
@@ -39,8 +37,12 @@ class DepartureTableViewController: UITableViewController {
         departureSearchController.searchResultsUpdater = self
         departureSearchController.obscuresBackgroundDuringPresentation = false
         departureSearchController.searchBar.placeholder = "Search departure flight"
+        tabBarController?.definesPresentationContext = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         tabBarController?.navigationItem.searchController = departureSearchController
-        definesPresentationContext = true
     }
     
     // MARK: - Table view data source
@@ -222,16 +224,5 @@ extension DepartureTableViewController: UISearchResultsUpdating {
             return (flight.arrival?.airport?.lowercased().contains(searchText.lowercased()) ?? false)
         })
         tableView.reloadData()
-    }
-}
-
-extension DepartureTableViewController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let selectedViewController = viewController as? DepartureTableViewController {
-            if selectedViewController.departureSearchController.isActive == true {
-                selectedViewController.departureSearchController.isActive = false
-                tableView.reloadData()
-            }
-        }
     }
 }
