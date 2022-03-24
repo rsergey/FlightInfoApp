@@ -40,6 +40,9 @@ class DetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UITableViewHeaderFooterView()
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .secondarySystemBackground
+        headerView.backgroundView = backgroundView
         
         let label = UILabel(frame: CGRect(x: tableView.safeAreaInsets.left + 50,
                                           y: 0,
@@ -76,6 +79,7 @@ class DetailsTableViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - Private Methods
     private func prepareFlightData() {
         flightData = [FlightMenu(title: "Flight Status",
                                  items: [flight.flightStatus?.capitalized ?? "-"],
